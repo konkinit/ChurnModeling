@@ -26,6 +26,9 @@ def log_transform(df):
         df["log_MB_Data_Usg_M0"+str(i)] = df["MB_Data_Usg_M0"+str(i)].apply(lambda x: np.log(1+x))
         df.drop(columns=["MB_Data_Usg_M0"+str(i)])
 
+# label variable encoding
+# def label_encode_variable(df):
+
 # retrieving the list of variables having missing values
 def missig_var(df):
     df_missing = df.isnull().sum().to_frame().reset_index()
