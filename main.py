@@ -2,7 +2,9 @@
 import yaml
 from src.data.import_data import import_from_S3
 from src.data.train_test_split import make_val_split
-from src.features.build_features import useless_feature, decode_char, imputation, lower_limit, log_transform, add_missing_indicator, label_encode_variable
+from src.features.build_features import useless_feature, label_encode_variable
+from src.features.build_features import imputation, lower_limit, log_transform
+from src.features.build_features import add_missing_indicator, decode_char
 from src.models.train_evaluate import evaluate_rdmf
 
 
