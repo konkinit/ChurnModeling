@@ -9,13 +9,13 @@ from src.models.train_evaluate import evaluate_rdmf
 
 
 if __name__ == "__main__":
-    with open("/home/coder/.config/code-server/telco_churn/config.yaml", 'r') as stream:
+    with open("/home/coder/telco_churn/config.yaml", 'r') as stream:
         config = yaml.safe_load(stream)
 
     # data
     data = import_from_S3(config["input"]["key_id"], config["input"]["access_key"], config["input"]["token"])
 
-    ## metadata variable management pipelines
+    # # metadata variable management pipelines
     data = useless_feature(data)
     data = decode_char(data)
     data = lower_limit(data)
@@ -23,7 +23,7 @@ if __name__ == "__main__":
     data = label_encode_variable(data)
     data = add_missing_indicator(data)
 
-    ## splitting 
+    # # splitting
     X_train, X_test, y_train, y_test = make_val_split(data)
 
     # imputation
@@ -35,4 +35,3 @@ if __name__ == "__main__":
     evaluate_rdmf(X_train, X_test, y_train, y_test, n_estimators=20)
 
     # model comparaison
-    
