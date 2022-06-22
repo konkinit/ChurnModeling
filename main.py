@@ -13,7 +13,7 @@ if __name__ == "__main__":
         config = yaml.safe_load(stream)
 
     # data
-    data = import_from_S3(config["input"]["key_id"], config["input"]["access_key"], config["input"]["token"])
+    data = import_from_S3(config["input"]["bucket"], config["input"]["path"], config["input"]["key_id"], config["input"]["access_key"], config["input"]["token"])
 
     # # metadata variable management pipelines
     data = useless_feature(data)
