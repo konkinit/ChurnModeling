@@ -9,7 +9,7 @@ from src.models.train_evaluate import evaluate_rdmf
 
 
 if __name__ == "__main__":
-    with open("/home/coder/telco_churn/config.yaml", 'r') as stream:
+    with open("/home/onyxiapython --version/telco_churn/config.yaml", 'r') as stream:
         config = yaml.safe_load(stream)
 
     # data
