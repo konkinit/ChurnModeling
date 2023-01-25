@@ -1,35 +1,36 @@
 """Main script of the project."""
 import yaml
-from src.data.import_data import import_from_S3
+import os
+from src.data.import_data import import_from_local
 from src.data.train_test_split import make_val_split
-from src.features.build_features import useless_feature, label_encode_variable
-from src.features.build_features import imputation, lower_limit, log_transform
-from src.features.build_features import add_missing_indicator, decode_char
+from src.features.build_features import DataProcessing
 from src.models.train_evaluate import evaluate_rdmf
 
+os.chdir("/home/ikonkobo/Desktop/Self_Learning/telco_churn/")
 
 if __name__ == "__main__":
-    with open("/home/onyxiapython --version/telco_churn/config.yaml", 'r') as stream:
+    with open("config.yaml", 'r') as stream:
         config = yaml.safe_load(stream)
 
     # data
-    data = import_from_S3(config["input"]["bucket"], config["input"]["path"], config["input"]["key_id"], config["input"]["access_key"], config["input"]["token"])
+    data = import_from_local(".")
 
-    # # metadata variable management pipelines
-    data = useless_feature(data)
-    data = decode_char(data)
-    data = lower_limit(data)
-    data = log_transform(data)
-    data = label_encode_variable(data)
-    data = add_missing_indicator(data)
+    ## metadata variable management pipelines
+    (DataProcessing(data)
+        .useless_feature()
+        .decode_char()
+        .lower_limit()
+        .log_transform()
+        .label_encode_variable()
+        .add_missing_indicator()
+    )
 
-    # # splitting
+    ## splitting
     X_train, X_test, y_train, y_test = make_val_split(data)
 
     # imputation
-    X_train = imputation(X_train)
-
-    X_test = imputation(X_test)
+    DataProcessing(X_train).imputation()
+    DataProcessing(X_test).imputation()
 
     # models pipelines
     evaluate_rdmf(X_train, X_test, y_train, y_test, n_estimators=20)

@@ -1,0 +1,129 @@
+Categorical-valued inputs
+Name	Label	Description
+credit_class	Credit Class	Credit category for an account or customer. It summarizes the overall credit worthiness of a customer or account.
+sales_channel	Acquisition Channel	The way consumer was persuaded to purchase company's services.
+region	Account Region	Customer account region.
+state	Account State	Customer state location.
+city	Account City	City designation for customer address.
+zipcode_primary	Account Code	Primary customer ZIP code.
+product_plan_desc	Plan Name	Customer's product plan.
+handset_age_grp	Handset Age Group	Customer's handset age in days.
+handset	Handset Mfg	Handset manufacturer. Values include Apple, HTC, LG, Motorola, Nokia, Samsung, and Unknown.
+lifestage	Plan Life Stage	Type of contract.
+rp_pooled_ind	Pooled Rate Plan	Indicates whether customer has pooled rate.
+call_center	Last Call Center Used	Location of the last call center used.
+issue_level1	Call Center Issue Level 1	Level 1 reason of the call.
+issue_level2	Call Center Issue Level 2	Level 2 reason of the call.
+call_category_1	Call Center Category 1	Category 1 for the call.
+call_category_2	Call Center Category 2	Category 2 for the call.
+resolution	Final Resolution	Resolution action taken by call center.
+verbatims	Survey Verbatim	Feedback from customers via call centers.
+
+Interval-valued inputs
+Name	Label	Description
+lifetime_value	Lifetime Value	Customer's value.
+avg_arpu_3m	3M Avg Revenue per User	Average revenue for the past three months.
+acct_age	Account Tenure	Number of months that the account has been active.
+billing_cycle	Billing Cycle	Customer's billing cycle (period of the month).
+nbr_contract_ltd	Total Number Contract Lifetime	Number of contracts during life cycle.
+rfm_score	Account Ranking (RFM Score)	Customer's account score.
+Est_HH_Income	Estimated HH Income	Household income.
+region_lat	Account Region Latitude	Customer region latitude.
+region_long	Account Region Longitude	Customer region longitude.
+state_lat	Account State Latitude	State latitude.
+state_long	Account State Longitude	State longitude.
+city_lat	Account City Latitude	Customer city latitude.
+city_long	Account City Longitude	Customer city longitude.
+zip_lat	Account ZIP Code Latitude	ZIP code latitude.
+zip_long	Account ZIP Code Longitude	ZIP code longitude.
+cs_med_home_value	Census Area Median Home Value Index	Median home value in customer's area.
+cs_pct_home_owner	Census Area Percent Home Owner	Percentage home owner in customer's area.
+cs_ttl_pop	Census Area Total Population	Population in customer's area.
+cs_hispanic	Census Area Hispanic	Hispanic population in customer's area.
+cs_caucasian	Census Area Caucasian	Caucasian population in customer's area.
+cs_afr_amer	Census Area African-American	African-American population in customer's area.
+cs_other	Census Area Other	Other population in customer's area.
+cs_ttl_urban	Census Area Total Urban	Urban population in customer's area.
+cs_ttl_rural	Census Area Total Rural	Rural population in customer's area.
+cs_ttl_male	Census Area Total Males	Male population in customer's area.
+cs_ttl_female	Census Area Total Females	Female population in customer's area.
+cs_ttl_hhlds	Census Area Total Households	Households in customer's area.
+cs_ttl_mdage	Census Area Median Age	Median age in customer's area.
+mb_inclplan	Plan Data MB	MB included in the plan.
+ever_days_over_plan	Total Days Over Plan	Total days over the plan.
+ever_times_over_plan	Total Times Over Plan	Total times over the plan.
+data_device_age	Avg Age of Devices on Plan	Average age of devices on the plan.
+equip_age	Handset Age	Age of equipment history, whether mobile device, smartphone, or another handset type.
+mfg_apple	Own Apple	Apple manufactured device. 1 is Yes, 0 means No.
+mfg_samsung	Own Samsung	Samsung manufactured device. 1 is Yes, 0 means No.
+mfg_htc	Own HTC	HTC manufactured device. 1 is Yes, 0 means No.
+mfg_motorola	Own Motorola	Motorola manufactured device. 1 is Yes, 0 means No.
+mfg_lg	Own LG	LG manufactured device. 1 is Yes, 0 means No.
+mfg_nokia	Own Nokia	Nokia manufactured device. 1 is Yes, 0 means No.
+delinq_indicator	Delinquent Indicator	Delinquency indicator. Scale varies from -2 to +4, depending on customer history.
+times_delinq	Consecutive Mths Delinquent	Consecutive months in default.
+count_of_suspensions_6m	Times Suspended Last 6M	Times suspended in the past six months.
+avg_days_susp	Days Suspended Last 6M	Days suspended in the past six months.
+calls_total	Total Calls Curr	Current number of calls.
+calls_in_pk	Calls Incoming Peak	Number of calls received in peak time.
+calls_in_offpk	Calls Incoming Off-Peak	Number of calls received in off-peak time.
+calls_out_offpk	Calls Outgoing Off-Peak	Number of calls made in off-peak time.
+calls_out_pk	Calls Outgoing Peak	Number of calls made in peak time.
+mou_total_pct_MOM	Minutes Total Pct Change Month over Month	Percentage of minutes change month over month.
+mou_onnet_pct_MOM	Minutes on Network Pct Change Month over Month	Percentage of minutes on network change month over month.
+mou_roam_pct_MOM	Minutes Roaming Pct Change Month over Month	Percentage of minutes on roaming change month over month.
+mou_onnet_6m_normal	6M Avg Minutes on Network Normally Distributed	Minutes of use on network over six months normally distributed.
+mou_roam_6m_normal	6M Avg Minutes Roaming Normally Distributed	Minutes of use in roaming over six months normally distributed.
+voice_total_bill_mou_curr	Total Voice Billed Minutes of Use	Current minutes of voice billed.
+tot_voice_chrgs_curr	Total Voice Charges	Current minutes of voice charged.
+tot_drpd_pr1	Number of Dropped Calls 1 Mth Prior	Number of dropped calls on the previous month.
+bill_data_usg_m03	3M Avg Billed Data Usage	Average data billed over the past three months.
+bill_data_usg_m06	6M Avg Billed Data Usage	Average data billed over the past six months.
+bill_data_usg_m09	9M Avg Billed Data Usage	Average data billed over the past nine months.
+mb_data_usg_m01	MB Data Usage 1 Mth Prior	MB data used on the previous month.
+mb_data_usg_m02	MB Data Usage 2 Mths Prior	MB data used prior two months.
+mb_data_usg_m03	MB Data Usage 3 Mths Prior	MB data used prior three months.
+mb_data_ndist_mo6m	6M Avg Billed Data Usage Normally Distributed	Data used on network over six months normally distributed.
+mb_data_usg_roamm01	MB Data Usage Roam 1 Mth Prior	Data used in roaming in the previous month.
+mb_data_usg_roamm02	MB Data Usage Roam 2 Mths Prior	Data used in roaming prior two months.
+mb_data_usg_roamm03	MB Data Usage Roam 3 Mths Prior	Data used in roaming prior three months.
+data_usage_amt	Data Usage Amount	Total data usage amount over last month.
+tweedie_adjusted	Data Usage Amt Tweedie Distributed	Data used in Twitter.
+tot_mb_data_curr	Total MB of Data Usage	Current MB data used.
+tot_mb_data_roam_curr	Total MB of Roam Data Usage	Current MB data used in roaming.
+bill_data_usg_total	Total Billed Data Usage	Total billed data.
+tot_overage_chgs	Total Overage Charges	Total overage charged.
+data_prem_chrgs_curr	Premium Data Charges	Premium data charged.
+nbr_data_cdrs	Number of Data Records	Number of call detail records.
+avg_data_chrgs_3m	3M Avg Data Charges	Average data charged in the past three months.
+avg_data_prem_chrgs_3m	3M Avg Premium Data Charges	Average premium data charged in the past three months.
+avg_overage_chrgs_3m	3M Avg Overage Charges	Average overage data charged in the past three months.
+nbr_contacts	Number Times Customer Contacted	Number of contacts customer made to the company.
+calls_TS_acct	Number Calls Tech Support	Number of tech support calls.
+open_tsupcomplnts	Open Tech Support Complaints	Number of tech support complaints opened.
+num_tsupcomplnts	Tech Support Complaints - LTD	Number of tech support complaints.
+unsolv_tsupcomplnts	Unresolved Tech Support Complaints - LTD	Number of unsolved tech support complaints.
+wrk_orders	Open Work Orders	Number of open work orders.
+days_openwrkorders	Days of Open Work Orders	Days of open work orders.
+resolved_complnts	Resolved Complaints	Number of complaints resolved.
+calls_care_acct	Number of Calls Care Center	Call center care account assignment, which takes values between 0-9.
+calls_care_3mavg_acct	Number of Calls Care Center 3 Month Avg	Call center care account score over past three months averaged.
+calls_care_6mavg_acct	Number of Calls Care Center 6 Month Avg	Call center care account score over past six months averaged.
+res_calls_3mavg_acct	Resolved Calls - 3Mo Average	Average number of resolved customer service calls over past three months for the customer account.
+res_calls_6mavg_acct	Resolved Calls - 6Mo Average	Average number of resolved customer service calls over past six months for the customer account.
+last_rep_sat_score	Last Call Satisfaction Rating Given	Latest customer service representative satisfaction score (given by past customers).
+network_mention	Network Issues Discussed	Number of network issues discussed.
+service_mention	Service Issues Discussed	Number of service issues discussed.
+price_mention	Price Issues Discussed	Number of prices issues discussed.
+times_susp	Number of Times Suspended	Number of times suspended.
+curr_days_susp	Number of Days Suspended	Number of days suspended.
+pymts_late_ltd	Total Late Payments Lifetime	Number of late payments.
+calls_care_ltd	Total Calls to Care Lifetime	Number of calls to call center.
+MB_Data_Usg_M04	MB of Data Usage Month 4	MB data used in past four months.
+MB_Data_Usg_M05	MB of Data Usage Month 5	MB data used in past five months.
+MB_Data_Usg_M06	MB of Data Usage Month 6	MB data used in past six months.
+MB_Data_Usg_M07	MB of Data Usage Month 7	MB data used in past seven months.
+MB_Data_Usg_M08	MB of Data Usage Month 8	MB data used in past eight months.
+MB_Data_Usg_M09	MB of Data Usage Month 9	MB data used in past nine months.
+seconds_of_data_norm	Seconds of Data - Normalized	Number of seconds of data normalized.
+seconds_of_data_log	Seconds of Data - Natural Log	Number of seconds of data transformed by log.
