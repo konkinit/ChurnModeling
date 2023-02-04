@@ -2,6 +2,7 @@ from numpy import max, log
 from pandas import (
     DataFrame, concat, get_dummies)
 from typing import List
+from sklearn.preprocessing import OneHotEncoder
 
 
 class DataProcessing:
@@ -116,15 +117,25 @@ class DataProcessing:
 
     def onehot_encoding(self) -> None:
         """
-        verbatims is the only tet variable to let in the dataframe for text_mining
+        verbatims is the only tet variable 
+        to let in the dataframe for text_mining
         """
         l_object_vars = self.list_object_vars()
-        l_object_vars.remove('verbatims')
-        df_ = get_dummies(self.data[l_object_vars], prefix_sep="_")
+        enc = OneHotEncoder(handle_unknown='ignore')
+        df_ = DataFrame(data=enc.fit_transform(self.data[l_object_vars]).toarray(), 
+            columns=list(enc.get_feature_names_out())).astype(int)
         self.data.drop(l_object_vars, axis=1, inplace=True)
         self.data = concat([self.data, df_], 
                             axis=1)
-        assert ((self.list_object_vars()) == 0), "No character columns in data"
+        assert (len(self.list_object_vars()) == 0), "No character columns in data"
+
+    
+    def text_mining(self) -> None:
+        """
+        remove the variable to process with text mining methods
+        until the right techniques are found
+        """
+        self.data.drop("verbatims", axis=1, inplace=True)
 
 
 class MetaDataManagement(DataProcessing):
@@ -145,5 +156,6 @@ class DataManagement(DataProcessing):
 
     def data_management_pipeline(self):
         self.imputation()
+        self.text_mining()
         self.onehot_encoding()
         

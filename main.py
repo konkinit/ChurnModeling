@@ -2,7 +2,7 @@
 import yaml
 import os
 from src.data.import_data import import_from_local
-from data.train_valid_split import train_valid_split
+from src.data.train_valid_split import train_valid_split
 from src.features.build_features import MetaDataManagement, DataManagement
 from src.models.train_evaluate import evaluate_rdmf
 

@@ -1,7 +1,4 @@
-
-import re
-from numpy import max, log
-from pandas import DataFrame, concat, get_dummies
+from pandas import DataFrame
 from typing import List
 
 from bertopic import BERTopic
@@ -13,21 +10,21 @@ class TextMining:
                 valid_data: DataFrame) -> None:
         self.train_verbatims = train_data
         self.valid_verbatims = train_data
+
+        self.train_docs = train_data.verbatims.to_list()
+        self.valid_docs = valid_data.verbatims.to_list()
             
     
-    def train_BERTopic_model(self):
+    def BERTopic_model(self, n_topics: int):
         # Train a BERTopic model
         topic_model = BERTopic()
-        topics, probs = topic_model.fit_transform(self.train_verbatims)
-
-        # Fine-tune topic representations after training BERTopic
-        vectorizer_model = CountVectorizer(stop_words="english", ngram_range=(1, 3))
-        topic_model.update_topics(self.train_verbatims, vectorizer_model=vectorizer_model)
-
-        # Save the model
-        topic_model.save("BERTopic_model")
-
-
-    def scoring_BERTopic(self):
-        topic_model = BERTopic.load("./src/models/BERTopic_model")
-        topic_model._map_prediction(self.valid_docs)
+        topics, probs = topic_model.fit_transform(self.train_docs)
+        vectorizer_model = CountVectorizer(stop_words="english")
+        topic_model.update_topics(
+                                self.train_docs, 
+                                n_gram_range=(1, 3), 
+                                vectorizer_model=vectorizer_model
+                            )
+        topic_model.reduce_topics(self.train_docs, nr_topics=n_topics)
+        # Score the model on valid data
+        topic_model._map_predictions(self.valid_docs)
