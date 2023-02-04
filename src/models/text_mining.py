@@ -23,3 +23,11 @@ class TextMining:
         # Fine-tune topic representations after training BERTopic
         vectorizer_model = CountVectorizer(stop_words="english", ngram_range=(1, 3))
         topic_model.update_topics(self.train_verbatims, vectorizer_model=vectorizer_model)
+
+        # Save the model
+        topic_model.save("BERTopic_model")
+
+
+    def scoring_BERTopic(self):
+        topic_model = BERTopic.load("./src/models/BERTopic_model")
+        topic_model._map_prediction(self.valid_docs)
