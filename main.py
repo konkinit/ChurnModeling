@@ -9,6 +9,7 @@ os.chdir("/home/ikonkobo/Desktop/Self_Learning/telco_churn/")
 
 if __name__ == "__main__":
     # data
+    global data
     data = import_from_local(".")
 
     ## metadata variable management pipeline
