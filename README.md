@@ -1,3 +1,16 @@
-# Churn in Telco industry
+<h1 align="center">
+  ML App for Churn Prediction
+  <br/>
+</h1>
 
-This project applies machine learning to model churn in telecommunication industry
+
+<p align="center">This project aims <br/> </p>
+
+---
+<p align="center">
+<img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/konkinit/telco_churn/churnapp_test_build.yml?label=Test%20%26%20Docker%20build&style=for-the-badge">
+</p>
+
+---
+
+# Onboarding 
