@@ -10,3 +10,6 @@ def tests_file_present():
         required_files.extend(line.strip() for line in f)
     for file in required_files:
         assert os.path.isfile(os.path.join(file)), f"{file} is not present"
+
+
+print(os.path.join('./txc.txt'))
