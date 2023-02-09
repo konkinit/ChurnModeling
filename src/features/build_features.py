@@ -62,18 +62,45 @@ class DataProcessing:
             self.data.drop(columns=[f"MB_Data_Usg_M0{str(i)}"], inplace=True)
 
 
+    def missing_var(self) -> List:
+        """
+        retrieving the list of variables having missing values
+        """
+        df_missing = (self.data
+                        .select_dtypes(exclude=(object))
+                        .isnull()
+                        .sum()
+                        .to_frame()
+                        .reset_index()
+                    )
+        df_missing.columns = ["variable", "missing_nb"]
+        df_missing = df_missing.sort_values('missing_nb', ascending=False).reset_index(drop=True)
+        df_missing = (df_missing
+                        .sort_values('missing_nb', ascending=False)
+                        .reset_index(drop=True)
+                    )
+        return list(df_missing["variable"]) 
 
-    def interval_vars_binning(self)-> None:
-        l_float_vars = self.data.select_dtypes(exclude='object').columns.to_list()
-        l_float_vars.remove("churn")
-        for num_var in l_float_vars:
-            self.data[f"{num_var}_bin"] = qcut(
-                                        self.data[num_var],
-                                        4,
-                                        duplicates='drop').astype(str)
+
+    def imputation(self):
+        """
+        impute missing values with right method
+        """
+        list_missing_var = self.missing_var()
+        assert (
+            len(list_missing_var) > 0
+        ), "Columns with missing values"
+        for var in list_missing_var:
+            if len(self.data[var].unique()) > 50:
+                """
+                condition that a variable is continious
+                """
+                self.data[var].fillna(self.data[var].mean(), inplace=True)
+            else :
+                self.data[var].fillna(
+                    self.data[var].value_counts(ascending=False
+                    ).to_frame().reset_index().iloc[0, 0], inplace=True)
         
-        self.data.drop(l_float_vars, axis=1, inplace=True)
-
 
     def list_object_vars(self) -> List:
         return self.data.select_dtypes(include='object').columns.to_list()
@@ -97,7 +124,22 @@ class DataProcessing:
 
         assert (len(self.list_object_vars()) == 1), "Other object vars than verbatims"
 
-    
+    """
+    def interval_vars_binning_encoding(self)-> None:
+        l_float_vars = self.data.select_dtypes(exclude='object').columns.to_list()
+        #l_float_vars.remove("churn")
+        for num_var in l_float_vars:
+            self.data[f"{num_var}_bin"] = qcut(
+                                        self.data[num_var],
+                                        4,
+                                        retbins = True,
+                                        labels=["Q1", "Q2", "Q3", "Q4"],
+                                        duplicates='drop')[0].astype(str)
+        self.data.drop(l_float_vars, axis=1, inplace=True)
+        self.onehot_encoding()
+    """
+
+
     def text_mining(self) -> None:
         """
         remove the variable to process with text mining methods
@@ -116,7 +158,6 @@ class MetaDataManagement(DataProcessing):
         self.decode_char()
         self.lower_limit()
         self.log_transform()
-        self.interval_vars_binning()
         self.onehot_encoding()
 
 
@@ -126,6 +167,5 @@ class DataManagement(DataProcessing):
 
 
     def data_management_pipeline(self):
+        self.imputation()
         self.text_mining()
-        
-        
