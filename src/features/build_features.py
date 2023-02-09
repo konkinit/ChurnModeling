@@ -162,9 +162,11 @@ class MetaDataManagement(DataProcessing):
 
 
 class DataManagement(DataProcessing):
-    def __init__(self, raw_data: DataFrame) -> None:
+    def __init__(self, 
+                raw_data: DataFrame
+            ) -> None:
         super().__init__(raw_data)
-
+    
 
     def data_management_pipeline(self):
         self.imputation()

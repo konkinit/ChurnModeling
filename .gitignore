@@ -1,5 +1,3 @@
-*.yaml
-*.yml
 *.sas7bdat
 
 # Created by https://www.toptal.com/developers/gitignore/api/python
