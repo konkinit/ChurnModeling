@@ -22,4 +22,4 @@ def import_from_S3(
 
 
 def import_from_local(path):
-    return read_sas(f"{path}/data/raw/commsdata.sas7bdat")
+    return read_sas(f"{path}/data/raw/commsdata.sas7bdat").set_index("Customer_ID")
