@@ -9,4 +9,4 @@ def tests_file_present():
     with open("required_files.txt", "r") as f:
         required_files.extend(line.strip() for line in f)
     for file in required_files:
-        assert os.path.isfile(os.path.join(file)), f"{file} is present"
+        assert os.path.isfile(os.path.join(file)), f"{file} is not present"
