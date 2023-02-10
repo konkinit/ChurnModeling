@@ -21,17 +21,6 @@ class DataProcessing:
                     "state_long", "tweedie_adjusted", "upsell_xsell"], 
                     axis=1, inplace=True)
 
-
-    def decode_char(self) -> None:
-        """
-        decode str to UTF-8
-        """
-        list_vars_object = list(self.data.select_dtypes(
-                                exclude=['int64', 'float64']
-                                ).columns)
-        for var in list_vars_object:
-            self.data[var] = self.data[var].apply(lambda x : x.decode("utf-8"))
-
     
     def lower_limit(self) -> None:
         """

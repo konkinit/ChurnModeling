@@ -4,7 +4,7 @@
 </h1>
 
 
-<p align="center">This project aims <br/> </p>
+<p align="center">This project aims to predict churn using data set from the Telco industry<br/> </p>
 
 ---
 <p align="center">
@@ -13,4 +13,4 @@
 
 ---
 
-# Onboarding 
+## Onboarding 
