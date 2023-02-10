@@ -8,12 +8,20 @@ def evaluate_rdmf(
         y_test, 
         n_estimators=20):
     """
-    Train, fit and score the model to test data to evaluate the model
+    Train, fit and score the model 
+    to test data to evaluate the model
     """
-    rdmf = RandomForestClassifier(n_estimators=n_estimators)
+    rdmf = RandomForestClassifier(
+        n_estimators=n_estimators)
     rdmf.fit(X_train, y_train)
     rdmf_score = rdmf.score(X_test, y_test)
 
-    print("{} % of correct answers on test data for validation".format(round(rdmf_score*100)))
+    print("{} % of correct preds ".format(round(rdmf_score*100)))
     print("Confusion matrix")
-    print(confusion_matrix(y_test, rdmf.predict(X_test)))
+    print(
+        confusion_matrix
+            (
+            y_test, 
+            rdmf.predict(X_test)
+            )
+        )
