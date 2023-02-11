@@ -50,8 +50,9 @@ class MetadataStats:
                     var, var, "Ordinal",
                     self.data[var].isna().sum(), len(self.data[var].unique()),
                     self.data[var].min(), self.data[var].max(), 
-                    self.data[var].mean(), self.data[var].mode(),
-                    nan, nan, nan]
+                    round(self.data[var].mean(), 3), self.data[var].mode(),
+                    nan, 
+                    nan, nan]
                 return DataFrame.from_dict([{num_keys[i]: l_values[i] for i in range(7)}])
         else:
             if len(self.data[var].unique()) > 1000:
@@ -67,35 +68,23 @@ class MetadataStats:
                 return DataFrame.from_dict([{char_keys[i]: l_values[i] for i in range(6)}])
         
 
-
     
-    def char_metadata_summarizing(
-            self
+    def metadata_report(
+            self,
+            vars_type: str
             ) -> DataFrame:
 
-        df = DataFrame(columns=char_keys)
-
-        l_char_vars = (self.data
-                        .select_dtypes(include="object")
+        if vars_type == 'char':
+            df = DataFrame(columns=char_keys)
+            l_char_vars = (self.data
+                        .select_dtypes(include='object')
                         .columns
                         .tolist())
         
-        for var in l_char_vars:
-            df = concat(
-                        [df, self.variable_summarizing(var)], 
-                        axis=0, 
-                        ignore_index=True)
-        return df.sort_values("Type").reset_index(drop=True)
-
-
-    def num_metadata_summarizing(
-            self
-            ) -> DataFrame:
-
-        df = DataFrame(columns=char_keys)
-
-        l_char_vars = (self.data
-                        .select_dtypes(exclude="object")
+        else: 
+            df = DataFrame(columns=num_keys)
+            l_char_vars = (self.data
+                        .select_dtypes(exclude='object')
                         .columns
                         .tolist())
         

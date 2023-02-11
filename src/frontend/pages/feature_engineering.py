@@ -21,8 +21,12 @@ st.markdown("Below is the metadata tables, one for numerocal data type and the o
 for character data type. They describe the raw properties of each feature. \
 for better understanding and better decision")
 
-st.dataframe(data=MetadataStats(raw_data).char_metadata_summarizing())
-st.dataframe(data=MetadataStats(raw_data).num_metadata_summarizing())
+st.dataframe(
+    data=MetadataStats(raw_data).metadata_report('char'),
+    use_container_width=True)
+st.dataframe(
+    data=MetadataStats(raw_data).metadata_report('num'),
+    use_container_width=True)
 
 st.markdown("# Numerical features processing")
 st.markdown("A starting point of this section is the identification of \
@@ -57,5 +61,8 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("* It is not reasonnable for some variables such as  to have negative values.\
 To handle this incoherence the $ReLU$ is applied to censor the value")
+
+
+st.markdown("# Categorical & Text features processing")
 
 
