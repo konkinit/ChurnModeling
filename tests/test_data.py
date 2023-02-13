@@ -14,3 +14,4 @@ def tests_file_present():
     print(required_files)
     for file in required_files:
         assert os.path.isfile(os.path.join(file)), f"{file} is not present"
+
