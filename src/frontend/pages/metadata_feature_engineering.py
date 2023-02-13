@@ -48,7 +48,7 @@ feature = st.selectbox(
     (f"MB_Data_Usg_M0{str(i)}" for i in range(4, 10)))
 
 log_feature = st.radio(
-    "Choose the raw or log-transformed values",
+    "Choose the values to be plotted: raw or log-transformed",
     (feature, f"log_{feature}"))
 
 fig = px.histogram(
@@ -65,4 +65,10 @@ To handle this incoherence the $ReLU$ is applied to censor the value")
 
 st.markdown("# Categorical & Text features processing")
 
+st.markdown("In order to outcome to same data structure for the both train and valid data sets, the decisions here are:\n\
+* For categorical features the method employed is OneHotEncoding \
+with missing values, if they exist, form a category.\n\
+* The text variable which is `verbatims` will be handled after splitting the data set into train and\
+valid partition in order to avoid information leaking. Indeed the idea here is to build a text mining model\
+on the train data and afterwards score the valid data set ")
 

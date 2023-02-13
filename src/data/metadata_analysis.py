@@ -4,20 +4,20 @@ from typing import Dict, Any
 
 
 num_keys = [
-                    "Variable Name", "Label", "Type",
-                    "Number of missing",
-                    "Number of distinct values",
-                    "Minimum", "Maximum", 
-                    "Mean", "Mode",
-                    "Standard Deviation", "Skewness", "Kurtosis"
-                ]
+                "Variable Name", "Label", "Type",
+                "Number of missing",
+                "Number of distinct values",
+                "Minimum", "Maximum", 
+                "Mean", "Mode",
+                "Standard Deviation", "Skewness", "Kurtosis"
+            ]
 
 
 char_keys = [
-                    "Variable Name", "Label", "Type",
-                    "Number of missing",
-                    "Number of categories", "Mode"
-                ]
+                "Variable Name", "Label", "Type",
+                "Number of missing",
+                "Number of categories", "Mode"
+            ]
 
 
 class MetadataStats:
@@ -43,7 +43,7 @@ class MetadataStats:
                     round(self.data[var].mean(), 3), round(self.data[var].mode()[0], 3), 
                     round(self.data[var].std(), 3), 
                     round(self.data[var].skew(), 3), round(self.data[var].kurt(), 3)]
-                return DataFrame.from_dict([{num_keys[i]: l_values[i] for i in range(10)}])
+                return DataFrame.from_dict([{num_keys[i]: l_values[i] for i in range(12)}])
                 
             else:
                 l_values = [
@@ -53,7 +53,7 @@ class MetadataStats:
                     round(self.data[var].mean(), 3), self.data[var].mode(),
                     nan, 
                     nan, nan]
-                return DataFrame.from_dict([{num_keys[i]: l_values[i] for i in range(7)}])
+                return DataFrame.from_dict([{num_keys[i]: l_values[i] for i in range(12)}])
         else:
             if len(self.data[var].unique()) > 1000:
                 l_values = [
@@ -67,7 +67,6 @@ class MetadataStats:
                     self.data[var].mode().values[0]]
                 return DataFrame.from_dict([{char_keys[i]: l_values[i] for i in range(6)}])
         
-
     
     def metadata_report(
             self,

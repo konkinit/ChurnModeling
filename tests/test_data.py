@@ -6,7 +6,7 @@ if os.getcwd() not in sys.path:
 
 def tests_file_present():
     """
-    test the presence of the data file
+    test the presence of the data/inputs file
     """
     required_files = []
     with open("required_files.txt", "r") as f:
