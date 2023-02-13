@@ -1,1 +1,1 @@
-./data/raw/commsdata.sas7bdat
+./data/app_inputs/sample_input.yaml
