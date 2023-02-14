@@ -46,6 +46,7 @@ st.markdown("\
 * Some varoable especially those having `MB_Data_Usg_M0` are very skewed as the plot describes. \
 A $\log$ transformation here is suitable to handle log_MB_Data_Usg_M0_i = $\log$ ( 1 + MB_Data_Usg_M0_i )")
 
+
 feature = st.selectbox(
     "Choose a variable to see its distribution",
     (f"MB_Data_Usg_M0{str(i)}" for i in range(4, 10)))
@@ -77,4 +78,3 @@ on the train data and afterwards score the valid data set ")
 
 
 st.markdown("## Data Level")
-
