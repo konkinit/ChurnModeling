@@ -1,8 +1,11 @@
 import os
 import sys
+import pytest
 
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
+
+from src.data.checkers import *
 
 def tests_file_present():
     """
@@ -14,3 +17,12 @@ def tests_file_present():
     print(required_files)
     for file in required_files:
         assert os.path.isfile(os.path.join(file)), f"{file} is not present"
+
+
+@pytest.mark.parametrize(
+    "frac_input, is_valid",
+    [("80", True), ("50.77", False), ("404", False)],
+)
+
+def test_train_fract_check(frac_input, is_valid):
+    assert train_frac_check(frac_input) == is_valid
