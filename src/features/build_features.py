@@ -5,6 +5,11 @@ from typing import List
 from sklearn.preprocessing import OneHotEncoder
 
 
+def indicator_ab(x:float, a: float, b:float):
+    if a-0.001 < x <= b:
+        return 1
+    return 0 
+
 class DataProcessing:
     def __init__(self, raw_data: DataFrame) -> None:
         self.data = raw_data
@@ -63,7 +68,10 @@ class DataProcessing:
                         .reset_index()
                     )
         df_missing.columns = ["variable", "missing_nb"]
-        df_missing = df_missing.sort_values('missing_nb', ascending=False).reset_index(drop=True)
+        df_missing = (df_missing
+                            .sort_values('missing_nb', ascending=False)
+                            .reset_index(drop=True)
+                    )
         df_missing = (df_missing
                         .sort_values('missing_nb', ascending=False)
                         .reset_index(drop=True)
@@ -142,9 +150,8 @@ class MetaDataManagement(DataProcessing):
         super().__init__(raw_data)
 
 
-    def metadata_management_pipeline(self):
+    def metadata_management_pipeline(self) -> None:
         self.useless_feature()
-        self.decode_char()
         self.lower_limit()
         self.log_transform()
         self.onehot_encoding()
@@ -155,8 +162,31 @@ class DataManagement(DataProcessing):
                 raw_data: DataFrame
             ) -> None:
         super().__init__(raw_data)
+
+
+    def binning_interval_features(self) -> None:
+        for var in self.data.select_dtypes(exclude='object').columns:
+            if len(self.data[var].unique()) > 4:
+                t_quantile = [
+                        self.data[var].min(),
+                        self.data[var].quantile(0.25),
+                        self.data[var].quantile(0.5),
+                        self.data[var].quantile(0.75),
+                        self.data[var].max()
+                    ]
+                for i in range(4):
+                    self.data[f"{var}_Q{i+1}"] = (self.data[var]
+                                      .apply(lambda x: indicator_ab(
+                                                            x, 
+                                                            t_quantile[i], 
+                                                            t_quantile[i+1]
+                                                        )
+                                                    )
+                                                )
+                self.data.drop(var, axis=1, inplace=True)
     
 
-    def data_management_pipeline(self):
+    def data_management_pipeline(self) -> None:
         self.imputation()
+        self.binning_interval_features()
         self.text_mining()

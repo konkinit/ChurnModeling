@@ -16,7 +16,9 @@ def tests_file_present():
         required_files.extend(line.strip() for line in f)
     print(required_files)
     for file in required_files:
-        assert os.path.isfile(os.path.join(file)), f"{file} is not present"
+        assert (os.path.isfile(os.path.join(file)), 
+            f"{file} is not present"
+            )
 
 
 @pytest.mark.parametrize(

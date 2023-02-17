@@ -1,13 +1,16 @@
+import os
 import sys
+import yaml
 sys.path.append("/home/ikonkobo/Desktop/Self_Learning/telco_churn/")
+os.chdir("/home/ikonkobo/Desktop/Self_Learning/telco_churn/")
 from pandas import DataFrame
 from numpy import log
 import streamlit as st
 import plotly.express as px
-from src.data.metadata_analysis import MetadataStats
 from src.visualization.plotly_func import df_skewed_feature
 from src.data.import_data import import_from_local
 from src.data.train_valid_split import train_valid_split
+from src.data.metadata_analysis import MetadataStats
 from src.features.build_features import MetaDataManagement, DataManagement
 from src.models.random_forest import evaluate_rdmf
 
@@ -69,12 +72,27 @@ To handle this incoherence the $ReLU$ is applied to censor the value")
 
 st.markdown("### Categorical & Text features processing")
 
-st.markdown("In order to outcome to same data structure for the both train and valid data sets, the decisions here are:\n \
+st.markdown("In order to outcome to same data structure for the both train and valid \
+ data sets, the decisions here are:\n \
 * For categorical features the method employed is OneHotEncoding \
 with missing values, if they exist, form a category.\n \
 * The text variable which is `verbatims` will be handled after splitting the data set into train and \
 valid partition in order to avoid information leaking. Indeed the idea here is to build a text mining model \
 on the train data and afterwards score the valid data set ")
 
+MetaDataManagement(raw_data).metadata_management_pipeline()
 
 st.markdown("## Data Level")
+
+with open(r'./data/app_inputs/sample_input.yaml') as file:
+    app_inputs = yaml.load(file, Loader=yaml.Loader)
+
+X_train, X_valid, y_train, y_valid = train_valid_split(raw_data, float(app_inputs["train_frac"]))
+
+DataManagement(X_train).data_management_pipeline()
+
+DataManagement(X_valid).data_management_pipeline()
+
+st.dataframe(data=X_train.head())
+
+st.dataframe(data=X_valid.head())

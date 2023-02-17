@@ -23,4 +23,4 @@ def import_from_S3(
 
 def import_from_local(path):
     return read_sas(f"{path}/data/raw/commsdata.sas7bdat", 
-                    encoding="utf-8").set_index("Customer_ID")
+                encoding="utf-8").set_index("Customer_ID")

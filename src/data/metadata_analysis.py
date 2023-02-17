@@ -35,7 +35,7 @@ class MetadataStats:
         Summarize a given variable
         """
         if self.data[var].dtype != 'object':
-            if len(self.data[var].unique()) > 1000:
+            if len(self.data[var].unique()) > 50:
                 l_values = [
                     var, var, "Interval",
                     self.data[var].isna().sum(), nan,
