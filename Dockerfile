@@ -1,12 +1,10 @@
 FROM python:3.8
 
-ADD ./EnergyBotApp .
-
 COPY . .
 
 RUN pip install --upgrade pip && pip install -r requirements.txt 
 
-WORKDIR /
+WORKDIR /telco_curn
 
 EXPOSE 8501
 
