@@ -1,11 +1,12 @@
-FROM python:3.8
+FROM python:3.8-slim
 
 COPY . .
 
-RUN pip install --upgrade pip && pip install -r requirements.txt 
+RUN pip install --upgrade pip \
+    && pip install -r requirements.txt 
 
-WORKDIR /telco_churn
+WORKDIR /src/frontend
 
-EXPOSE 8501
+EXPOSE 8585
 
-CMD ["streamlit", "run", "./src/frontend/app.py"]
+CMD ["streamlit", "run", "./app.py"]
