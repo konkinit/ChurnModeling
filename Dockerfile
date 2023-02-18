@@ -4,7 +4,7 @@ COPY . .
 
 RUN pip install --upgrade pip && pip install -r requirements.txt 
 
-WORKDIR /telco_curn
+WORKDIR /telco_churn
 
 EXPOSE 8501
 

@@ -25,7 +25,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("### Fraction of splitting to train and valid data")
 st.markdown("Before feature engineering starts, it is suitable to perform data splitting \
-in order to avoid information leaks. Here a startify splitting is performed.")
+in order to avoid information leaks. Here a stratify splitting is performed.")
 
 train_frac = st.slider(label='Choose the percent of the training data set', 
                         min_value=50, 
