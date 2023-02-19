@@ -8,11 +8,11 @@
 
 ---
 <p align="center">
-<img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/konkinit/telco_churn/churnapp_test_build.yml?label=Test%20%26%20Docker%20build&style=for-the-badge">
+<img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/konkinit/ChurnModeling/churnapp_test_build.yml?label=TEST%20%26%20DOCKER%20BUILD&style=for-the-badge">
 </p>
 
 <p align="center">
-<img src="https://img.shields.io/docker/image-size/kidrissa/churnapp?style=for-the-badge"> <img src="https://img.shields.io/github/repo-size/konkinit/ChurnModeling?label=REPO%20SIZE&style=for-the-badge">
+<img alt="Docker Size" src="https://img.shields.io/docker/image-size/kidrissa/churnapp?style=for-the-badge"> <img alt="Repo size src="https://img.shields.io/github/repo-size/konkinit/ChurnModeling?label=REPO%20SIZE&style=for-the-badge">
 </p>
 
 ---
