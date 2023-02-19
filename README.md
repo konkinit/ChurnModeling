@@ -11,6 +11,10 @@
 <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/konkinit/telco_churn/churnapp_test_build.yml?label=Test%20%26%20Docker%20build&style=for-the-badge">
 </p>
 
+<p align="center">
+<img src="https://img.shields.io/docker/image-size/kidrissa/churnapp">
+</p>
+
 ---
 
 ## Onboarding 
