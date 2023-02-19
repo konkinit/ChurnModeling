@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-<img alt="Docker Size" src="https://img.shields.io/docker/image-size/kidrissa/churnapp?style=for-the-badge"> <img alt="Repo size src="https://img.shields.io/github/repo-size/konkinit/ChurnModeling?label=REPO%20SIZE&style=for-the-badge">
+<img alt="LICENSE" src="https://img.shields.io/bower/l/p?color=blue&style=for-the-badge">  <img alt="Docker Size" src="https://img.shields.io/docker/image-size/kidrissa/churnapp?style=for-the-badge"> <img alt="Repo size" src="https://img.shields.io/github/repo-size/konkinit/ChurnModeling?label=REPO%20SIZE&style=for-the-badge">
 </p>
 
 ---
