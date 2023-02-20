@@ -1,18 +1,13 @@
-import os
-import sys
+import os, sys
 import yaml
 import streamlit as st
 import plotly.express as px
-from src.visualization.plotly_func import df_skewed_feature
-from src.data.import_data import import_from_local
-from src.data.train_valid_split import train_valid_split
-from src.data.metadata_analysis import MetadataStats
-from src.features.build_features import MetaDataManagement, DataManagement
+if os.getcwd() not in sys.path:
+    sys.path.append(os.getcwd())
+from src.visualization import df_skewed_feature
+from src.data import import_from_local, train_valid_splitting, MetadataStats
+from src.features import MetaDataManagement, DataManagement
 
-
-#sys.path.append("/home/ikonkobo/Desktop/Self_Learning/telco_churn/")
-#os.chdir("/home/ikonkobo/Desktop/Self_Learning/telco_churn/")
-#st.set_page_config(page_title="Data Processing & Feature Engineering")
 
 raw_data = import_from_local(".")
 
@@ -67,7 +62,7 @@ To handle this incoherence the $ReLU$ is applied to censor the value")
 st.markdown("### Categorical & Text features processing")
 
 st.markdown("In order to outcome to same data structure for the both train and valid \
- data sets, the decisions here are:\n \
+ data sets, thTextMininge decisions here are:\n \
 * For categorical features the method employed is OneHotEncoding \
 with missing values, if they exist, form a category.\n \
 * The text variable which is `verbatims` will be handled after splitting the data set into train and \
@@ -78,11 +73,11 @@ MetaDataManagement(raw_data).metadata_management_pipeline()
 
 st.markdown("## Data Level")
 
-with open(r'./data/app_inputs/sample_input.yaml') as file:
+with open(r'./inputs/app_inputs/sample_input.yaml') as file:
     app_inputs = yaml.load(file, Loader=yaml.Loader)
 
-X_train, X_valid, y_train, y_valid = train_valid_split(raw_data,
-                                                       float(app_inputs["train_frac"]))
+X_train, X_valid, y_train, y_valid = train_valid_splitting(raw_data,
+                                                           float(app_inputs["train_frac"]))
 
 DataManagement(X_train).data_management_pipeline()
 

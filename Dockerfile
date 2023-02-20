@@ -1,12 +1,12 @@
-FROM python:3.8-slim
+FROM python:3.10-slim
 
 COPY . .
 
-RUN pip install --upgrade pip \
+RUN pip install --upgrade pip 
     && pip install -r requirements.txt 
 
-WORKDIR /src/frontend
+WORKDIR ./src/frontend/
 
-EXPOSE 8585
+EXPOSE 8085
 
-CMD ["streamlit", "run", "./app.py"]
+CMD ["streamlit", "run", "Onboarding.py"]

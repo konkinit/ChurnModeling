@@ -1,11 +1,9 @@
-import sys
+import os, sys
 import streamlit as st
 import plotly.express as px
-from src.data.import_data import import_from_local
-from src.data.save_data import save_input_data
-
-
-#sys.path.append("/home/ikonkobo/Desktop/Self_Learning/telco_churn/")
+if os.getcwd() not in sys.path:
+    sys.path.append(os.getcwd())
+from src.data import import_from_local, save_input_data
 
 st.markdown("# Target variable: `churn`")
 
@@ -20,8 +18,8 @@ fig = px.pie(raw_data, "churn", width=450, height=450)
 st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("### Fraction of splitting to train and valid data")
-st.markdown("Before feature engineering starts, it is suitable to perform data splitting \
-in order to avoid information leaks. Here a stratify splitting is performed.")
+st.markdown("Before feature engineering starts, it is suitable to perform data \
+splitting in order to avoid information leaks. Here a stratify splitting is performed.")
 
 train_frac = st.slider(label='Choose the percent of the training data set',
                        min_value=50,

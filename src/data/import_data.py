@@ -24,5 +24,5 @@ def import_from_S3(
 
 def import_from_local(path) -> DataFrame:
     return read_sas(
-                f"{path}/data/raw/commsdata.sas7bdat",
+                f"{path}/inputs/raw/commsdata.sas7bdat",
                 encoding="utf-8").set_index("Customer_ID")
