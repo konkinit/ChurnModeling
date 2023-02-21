@@ -44,7 +44,7 @@ class MetadataStats:
                     var, var, "Ordinal",
                     self.data[var].isna().sum(), len(self.data[var].unique()),
                     self.data[var].min(), self.data[var].max(),
-                    round(self.data[var].mean(), 3), self.data[var].mode(),
+                    round(self.data[var].mean(), 3), self.data[var].mode()[0],
                     nan, nan, nan]
                 return DataFrame.from_dict([{num_keys[i]: l_values[i] for i in range(12)}])
         else:
