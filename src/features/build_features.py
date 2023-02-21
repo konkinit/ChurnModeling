@@ -129,7 +129,6 @@ class MetaDataManagement(DataProcessing):
         self.log_transform()
         self.onehot_encoding()
 
-
 class DataManagement(DataProcessing):
     def __init__(self, raw_data: DataFrame) -> None:
         super().__init__(raw_data)

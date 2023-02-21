@@ -2,6 +2,8 @@
 from pandas import DataFrame
 from bertopic import BERTopic
 from sklearn.feature_extraction.text import CountVectorizer
+
+
 class TextMining:
     def __init__(self, train_data: DataFrame, valid_data: DataFrame) -> None:
         self.train_verbatims = train_data
