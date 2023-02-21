@@ -5,9 +5,9 @@ COPY . .
 RUN pip install --upgrade pip 
     && pip install -r requirements.txt 
 
-WORKDIR ./src/frontend/
+WORKDIR .
 
 EXPOSE 8085
 
-CMD ["streamlit", "run", "Onboarding.py"]
+CMD ["streamlit", "run", "./src/frontend/Onboarding.py"]
 
