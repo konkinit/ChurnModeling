@@ -1,8 +1,10 @@
 from .import_data import import_data
-from .save_data import save_input_data
-from .checkers import check_train_frac
-from .train_valid_split import train_valid_splitting
 from .metadata_analysis import MetadataStats
+from .utils import (
+    save_input_data,
+    check_train_frac,
+    train_valid_splitting
+)
 
 
 __all__ = ["import_data", "save_input_data",

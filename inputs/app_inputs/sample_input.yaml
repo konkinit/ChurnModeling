@@ -1,2 +1,0 @@
-model: xgb
-train_frac: 0.7

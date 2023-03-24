@@ -4,7 +4,7 @@
 </h1>
 
 
-<p align="center">This project aims to predict churn using data set from the Telco industry<br/> </p>
+<p align="center">This project aims to predict churn using datasetss from the Telco industry<br/> </p>
 
 ---
 <p align="center">
@@ -36,5 +36,5 @@ end-to-end by entering some hyperparams to his convenience.
 
 ### Continous integration
 One continous integration (CI) procedure with 2 jobs mainly is designed and launched at every push to the main branch:
--  Testing. Pytest collects the test from the tests folder and execute them
+-  Testing. Pytest collects the test from the tests folder and executes them
   -  if Testing goes through, a Docker Image is built and pushed onto the docker hub

@@ -1,7 +1,7 @@
 import os
 import sys
 import streamlit as st
-import plotly.express as px
+from plotly.express import pie
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
 from src.data import import_data, save_input_data
@@ -16,7 +16,7 @@ missingness 87.9 % of the customers are not churned in contrast to 12.1 \
 
 raw_data = import_data()
 
-fig = px.pie(raw_data, "churn", width=450, height=450)
+fig = pie(raw_data, "churn", width=450, height=450)
 
 st.plotly_chart(fig, use_container_width=True)
 

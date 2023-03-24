@@ -2,13 +2,16 @@ import os
 import sys
 import yaml
 import streamlit as st
-import plotly.express as px
+from pandas.errors import PerformanceWarning
+from warnings import simplefilter
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
 from src.visualization import df_skewed_feature
 from src.data import import_data, train_valid_splitting, MetadataStats
 from src.features import MetaDataManagement, DataManagement
 
+
+simplefilter(action="ignore", category=PerformanceWarning)
 
 raw_data = import_data()
 
@@ -36,15 +39,15 @@ assumptions some features cannot have a certain values like negative \
 one or must be transformed in order to handle skewness or kurtosis.")
 
 
-st.markdown(f"\
+st.markdown("\
 * The following features can be handled as useless in view of the use case \
 `issue_level2`, `resolution`, `city`, `city_lat`, `city_long`, \
 `data_usage_amt`, \
 `mou_onnet_6m_normal`, `mou_roam_6m_normal`, `region_lat`, `region_long`, \
 `state_lat`, `state_long`, `tweedie_adjusted`, `upsell_xsell`; \n \
 * Some varoable especially those having `MB_Data_Usg_M0` are very skewed as \
-the plot describes. A {'$\\'}log$ transformation here is suitable to handle \
-log_MB_Data_Usg_M0_i = {'$\\'}log$ ( 1 + MB_Data_Usg_M0_i )")
+the plot describes. A $\\log$ transformation here is suitable to handle \
+log_MB_Data_Usg_M0_i = $\\log$ (1 + MB_Data_Usg_M0_i)")
 
 feature = st.selectbox(
     "Choose a variable to see its distribution",
@@ -79,7 +82,7 @@ MetaDataManagement(raw_data).metadata_management_pipeline()
 
 st.markdown("## Data Level")
 
-with open(r'./inputs/app_inputs/sample_input.yaml') as file:
+with open(r'./data/app_inputs/sample_input.yaml') as file:
     app_inputs = yaml.load(file, Loader=yaml.Loader)
 
 X_train, X_valid, y_train, y_valid = train_valid_splitting(
@@ -95,6 +98,6 @@ DataManagement(X_train).data_management_pipeline()
 
 DataManagement(X_valid).data_management_pipeline()
 
-st.dataframe(data=X_train.head())
+st.dataframe(data=X_train.astype(int).head())
 
-st.dataframe(data=X_valid.head())
+st.dataframe(data=X_valid.astype(int).head())

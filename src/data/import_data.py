@@ -7,7 +7,7 @@ if os.getcwd() not in sys.path:
 from src.data.utils import import_from_local, import_from_S3
 
 
-with open("./tokens.json") as f:
+with open("./data/tokens/tokens.json") as f:
     tokens = json.load(f)
 
 
@@ -26,8 +26,6 @@ def import_data():
     params = Import()
     try:
         return import_from_local(params.local_path)
-    except:
-        "Working on SSP Cloud"
     finally:
         return import_from_S3(
             params.endpoint,
