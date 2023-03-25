@@ -9,11 +9,6 @@ streamlit==1.18.1
 plotly==5.11.0
 s3fs==2023.1.0
 PyYAML==5.4.1
+bertopic==0.14.1
 tqdm==4.64.1
-datasets==2.10.0
 Jinja2==3.1.2
-transformers==4.26.1
-tensorflow==2.11.0
-torch==1.13.1
-sentencepiece==0.1.97
-tensorflow-datasets==4.8.3

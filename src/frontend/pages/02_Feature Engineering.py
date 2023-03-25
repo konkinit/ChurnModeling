@@ -2,6 +2,7 @@ import os
 import sys
 import yaml
 import streamlit as st
+from plotly.express import histogram
 from pandas.errors import PerformanceWarning
 from warnings import simplefilter
 if os.getcwd() not in sys.path:
@@ -57,10 +58,10 @@ log_feature = st.radio(
     "Choose the values to be plotted: raw or log-transformed",
     (feature, f"log_{feature}"))
 
-fig = px.histogram(df_skewed_feature(raw_data, feature),
-                   x=log_feature,
-                   nbins=30,
-                   histnorm='probability density')
+fig = histogram(df_skewed_feature(raw_data, feature),
+                x=log_feature,
+                nbins=30,
+                histnorm='probability density')
 st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("* It is not reasonnable for some variables such as to have \
@@ -98,6 +99,6 @@ DataManagement(X_train).data_management_pipeline()
 
 DataManagement(X_valid).data_management_pipeline()
 
-st.dataframe(data=X_train.astype(int).head())
+# st.dataframe(data=X_train.astype(int).head())
 
-st.dataframe(data=X_valid.astype(int).head())
+# st.dataframe(data=X_valid.astype(int).head())
