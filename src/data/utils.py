@@ -2,8 +2,10 @@ import os
 import sys
 import yaml
 import s3fs
+from typing import Tuple
 from sklearn.model_selection import train_test_split
-from pandas import read_sas, DataFrame
+from pandas import read_sas, DataFrame, SparseDtype
+from scipy.sparse import csc_matrix, _csc
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
 
@@ -52,7 +54,8 @@ def save_input_data(key, value) -> None:
         yaml.dump(data, file)
 
 
-def train_valid_splitting(df: DataFrame, frac: float):
+def train_valid_splitting(
+        df: DataFrame, frac: float):
     y = df["churn"]
     X = df.drop("churn", axis=1)
     X_train, X_valid, y_train, y_valid = train_test_split(
@@ -61,4 +64,11 @@ def train_valid_splitting(df: DataFrame, frac: float):
                                                 test_size=1-frac,
                                                 stratify=y,
                                                 random_state=42)
-    return X_train, X_valid, y_train, y_valid
+    return X_train, X_valid, y_train.values, y_valid.values
+
+
+def dataframe2sparse(df: DataFrame) -> Tuple[_csc.csc_matrix, list]:
+    return (
+        csc_matrix(
+            df.astype(SparseDtype("int32", 0)).sparse.to_coo()),
+        df.columns.tolist())

@@ -1,14 +1,22 @@
 import os
 import sys
-import yaml
 import streamlit as st
+from dataclasses import dataclass
 from plotly.express import histogram
+from numpy import ndarray
 from pandas.errors import PerformanceWarning
+from scipy.sparse import _csc
+from typing import List
 from warnings import simplefilter
+from yaml import load, Loader
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
 from src.visualization import df_skewed_feature
-from src.data import import_data, train_valid_splitting, MetadataStats
+from src.data import (
+    import_data,
+    train_valid_splitting,
+    MetadataStats
+)
 from src.features import MetaDataManagement, DataManagement
 
 
@@ -16,6 +24,7 @@ simplefilter(action="ignore", category=PerformanceWarning)
 
 raw_data = import_data()
 
+st.markdown("# Feature Engineering")
 st.markdown("Since ML model perform well with no leak of information \
 between train and test datasets, it comes to distinguish two levels of data \
 engineering")
@@ -84,21 +93,27 @@ MetaDataManagement(raw_data).metadata_management_pipeline()
 st.markdown("## Data Level")
 
 with open(r'./data/app_inputs/sample_input.yaml') as file:
-    app_inputs = yaml.load(file, Loader=yaml.Loader)
+    app_inputs = load(file, Loader=Loader)
 
 X_train, X_valid, y_train, y_valid = train_valid_splitting(
                                         raw_data,
                                         float(app_inputs["train_frac"]))
 
-st.markdown(f"Thsi part starts by splitting the data according to \
-the selected fraction in the previous page then \
-{100*float(app_inputs['train_frac'])} % is reserved for training models \
-and the remaining for model validation and  ")
+st.markdown(f"Thsi part starts by splitting the data according to the selected\
+ fraction in the previous page then {100*float(app_inputs['train_frac'])} \
+% is reserved for training models and the remaining for model validation.")
 
-DataManagement(X_train).data_management_pipeline()
+X_train_sp_mat, _features_name = DataManagement(
+                                    X_train).data_management_pipeline()
+X_valid_sp_mat, _features_name = DataManagement(
+                                    X_valid).data_management_pipeline()
 
-DataManagement(X_valid).data_management_pipeline()
 
-# st.dataframe(data=X_train.astype(int).head())
-
-# st.dataframe(data=X_valid.astype(int).head())
+@dataclass
+class Modeling_Data:
+    X_train_sparse: _csc.csc_matrix = X_train_sp_mat
+    X_valid_sparse: _csc.csc_matrix = X_train_sp_mat
+    y_train: ndarray = y_train
+    y_valid: ndarray = y_valid
+    features_name: List[str] = _features_name
+    target_name: str = "churn"

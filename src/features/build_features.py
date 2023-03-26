@@ -1,18 +1,14 @@
-from numpy import max, log
-from pandas import DataFrame
-from typing import List
-from sklearn.preprocessing import OneHotEncoder
 import os
 import sys
+from numpy import max, log
+from pandas import DataFrame
+from typing import List, Tuple
+from scipy.sparse import _csc
+from sklearn.preprocessing import OneHotEncoder
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
-from src.features.utils import quantiles_list
-
-
-def indicator_ab(x: float, a: float, b: float):
-    if a-0.001 < x <= b:
-        return 1
-    return 0
+from src.features.utils import quantiles_list, indicator_ab
+from src.data import dataframe2sparse
 
 
 class DataProcessing:
@@ -115,6 +111,9 @@ class DataProcessing:
         """
         self.data.drop("verbatims", axis=1, inplace=True)
 
+    def sparse_data_format(self) -> Tuple[_csc.csc_matrix, list]:
+        return dataframe2sparse(self.data)
+
 
 class MetaDataManagement(DataProcessing):
     def __init__(self, raw_data: DataFrame) -> None:
@@ -147,3 +146,4 @@ class DataManagement(DataProcessing):
     def data_management_pipeline(self) -> None:
         self.binning_interval_features()
         self.text_mining()
+        return self.sparse_data_format()
