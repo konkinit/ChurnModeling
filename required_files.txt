@@ -1,1 +1,1 @@
-./inputs/app_inputs/sample_input.yaml
+./data/app_inputs/sample_input.yaml
