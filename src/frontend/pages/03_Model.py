@@ -11,6 +11,8 @@ st.markdown("# Modeling")
 st.markdown("To sum up, the modling part starts with data resumed \
 in the following table")
 
+# insert table
+
 st.markdown("Since we deal with sparse matrix as inputs , mainly \
 tree-based models are implmented and compared. ")
 

@@ -10,4 +10,3 @@ RUN pip install --upgrade pip \
 EXPOSE 8085
 
 CMD ["streamlit", "run", "./src/frontend/Onboarding.py"]
-
