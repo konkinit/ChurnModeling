@@ -25,8 +25,8 @@ rdmf_params = Params_rdmf(
     _n_estimators=50,
     _max_depth=2)
 
-st.markdown(f"On training data , the model has a score \
-of {evaluate_rdmf(rdmf_params)}")
+st.markdown(f"On training data , the model achieves an accuracy \
+of {round(100*evaluate_rdmf(rdmf_params), 3)} %")
 
 
 st.markdown("## XGBoost")

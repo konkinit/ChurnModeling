@@ -112,7 +112,7 @@ X_valid_sp_mat, _features_name_valid = DataManagement(
 
 modeling_data = Modeling_Data(
                     X_train_sp_mat,
-                    X_train_sp_mat,
+                    X_valid_sp_mat,
                     y_train,
                     y_valid,
                     "churn")
