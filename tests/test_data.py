@@ -5,6 +5,7 @@ if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
 from src.data import check_train_frac
 
+
 def tests_file_present():
     """
     test the presence of the data/inputs file
@@ -22,4 +23,3 @@ def tests_file_present():
     [("80", True), ("50.77", False), ("404", False)])
 def test_check_train_frac(frac_input, is_valid):
     assert check_train_frac(frac_input) == is_valid
-
