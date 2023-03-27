@@ -1,5 +1,4 @@
-*.sas7bdat
-*.json
+# Custom extensions
 *.pkl
 
 # Created by https://www.toptal.com/developers/gitignore/api/python
