@@ -1,23 +1,24 @@
 import os
 import sys
 import streamlit as st
-from dataclasses import dataclass
 from plotly.express import histogram
-from numpy import ndarray
 from pandas.errors import PerformanceWarning
-from scipy.sparse import _csc
-from typing import List
+from pickle import dump
 from warnings import simplefilter
 from yaml import load, Loader
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
-from src.visualization import df_skewed_feature
 from src.data import (
     import_data,
     train_valid_splitting,
-    MetadataStats
+    MetadataStats,
+    Modeling_Data
 )
-from src.features import MetaDataManagement, DataManagement
+from src.features import (
+    MetaDataManagement,
+    DataManagement,
+    df_skewed_feature
+)
 
 
 simplefilter(action="ignore", category=PerformanceWarning)
@@ -103,17 +104,17 @@ st.markdown(f"Thsi part starts by splitting the data according to the selected\
  fraction in the previous page then {100*float(app_inputs['train_frac'])} \
 % is reserved for training models and the remaining for model validation.")
 
-X_train_sp_mat, _features_name = DataManagement(
+X_train_sp_mat, _features_name_train = DataManagement(
                                     X_train).data_management_pipeline()
-X_valid_sp_mat, _features_name = DataManagement(
+X_valid_sp_mat, _features_name_valid = DataManagement(
                                     X_valid).data_management_pipeline()
 
 
-@dataclass
-class Modeling_Data:
-    X_train_sparse: _csc.csc_matrix = X_train_sp_mat
-    X_valid_sparse: _csc.csc_matrix = X_train_sp_mat
-    y_train: ndarray = y_train
-    y_valid: ndarray = y_valid
-    features_name: List[str] = _features_name
-    target_name: str = "churn"
+modeling_data = Modeling_Data(
+                    X_train_sp_mat,
+                    X_train_sp_mat,
+                    y_train,
+                    y_valid,
+                    "churn")
+
+dump(modeling_data, open('./data/app_inputs/modeling_data.pkl', 'wb'))

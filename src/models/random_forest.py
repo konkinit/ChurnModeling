@@ -17,7 +17,7 @@ class Params_rdmf:
     _max_depth: int
 
 
-def evaluate_rdmf(config: Params_rdmf):
+def evaluate_rdmf(config: Params_rdmf) -> float:
     """
     Train, fit and score the model
     to test data to evaluate the model
@@ -27,3 +27,4 @@ def evaluate_rdmf(config: Params_rdmf):
         n_estimators=config._n_estimators)
     rdmf.fit(config.X_train, config.y_train)
     dump(rdmf, open('./data/models/rdmf_model.pkl', 'wb'))
+    return rdmf.score(config.X_train, config.y_train)

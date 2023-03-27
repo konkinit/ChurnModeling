@@ -2,6 +2,8 @@ import os
 import sys
 import yaml
 import s3fs
+from dataclasses import dataclass
+from numpy import ndarray
 from typing import Tuple
 from sklearn.model_selection import train_test_split
 from pandas import read_sas, DataFrame, SparseDtype
@@ -72,3 +74,15 @@ def dataframe2sparse(df: DataFrame) -> Tuple[_csc.csc_matrix, list]:
         csc_matrix(
             df.astype(SparseDtype("int32", 0)).sparse.to_coo()),
         df.columns.tolist())
+
+
+@dataclass
+class Modeling_Data:
+    X_train_sparse: _csc.csc_matrix
+    X_valid_sparse: _csc.csc_matrix
+    y_train: ndarray
+    y_valid: ndarray
+    target_name: str = "churn"
+
+
+Modeling_Data.__module__ = __name__

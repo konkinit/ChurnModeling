@@ -4,10 +4,12 @@ from .utils import (
     save_input_data,
     check_train_frac,
     train_valid_splitting,
-    dataframe2sparse
+    dataframe2sparse,
+    Modeling_Data
 )
 
 
 __all__ = ["import_data", "save_input_data",
            "train_valid_splitting", "MetadataStats",
-           "check_train_frac", "dataframe2sparse"]
+           "check_train_frac", "dataframe2sparse", 
+           "Modeling_Data"]
