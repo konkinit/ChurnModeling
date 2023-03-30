@@ -12,7 +12,7 @@ with open("./data/tokens/tokens.json") as f:
 
 
 @dataclass
-class Import:
+class ImportData:
     local_path: str = "."
     endpoint: str = tokens["endpoint_url"]
     bucket: str = tokens["bucket"]
@@ -23,7 +23,7 @@ class Import:
 
 
 def import_data():
-    params = Import()
+    params = ImportData()
     try:
         return import_from_local(params.local_path)
     finally:

@@ -6,8 +6,8 @@ WORKDIR /churn_modeling
 
 USER client
 
-RUN pip install --upgrade pip \
-    && pip install -r requirements.txt --user
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt --user
 
 EXPOSE 8085
 

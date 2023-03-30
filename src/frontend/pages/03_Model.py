@@ -48,8 +48,12 @@ _cutoff = st.slider(
                 step=0.05)
 
 
-_report_train, _acc_train, _report_valid, _acc_valid = evaluate_rdmf(
-                                                rdmf_params, _cutoff)
+(_report_train,
+ _acc_train,
+ _cm_train,
+ _report_valid,
+ _acc_valid,
+ _cm_valid) = evaluate_rdmf(rdmf_params, _cutoff)
 
 st.markdown(f"The accuracies on the training and valid datasets are \
 {round(100*_acc_train, 2)} % and {round(100*_acc_valid, 2)} % respectively \
@@ -57,6 +61,13 @@ according to a cutoff of {_cutoff}")
 
 st.markdown("The classification report on both training and validation \
 datasets are listed below")
+st.dataframe(
+    data=_cm_train,
+    use_container_width=False)
+st.dataframe(
+    data=_cm_valid,
+    use_container_width=False)
+
 st.dataframe(
     data=_report_train,
     use_container_width=True)
