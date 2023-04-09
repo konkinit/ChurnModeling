@@ -14,8 +14,10 @@ RUN groupadd --gid $USER_GID $USERNAME \
 USER ${USERNAME}
 
 RUN pip install --upgrade pip && \
-    pip install -r requirements.txt --user
+    pip install -r requirements.txt
 
-EXPOSE 8085
+EXPOSE 8501
 
-CMD ["streamlit", "run", "./src/frontend/Onboarding.py"]
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
+
+ENTRYPOINT ["streamlit", "run", "./src/frontend/Onboarding.py"]
