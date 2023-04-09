@@ -1,5 +1,9 @@
 from dataclasses import dataclass
-from numpy import linspace, ndarray
+from numpy import (
+    linspace,
+    ndarray,
+    array
+)
 from pandas import DataFrame
 from scipy.sparse._csc import csc_matrix
 from sklearn.ensemble import RandomForestClassifier
@@ -22,7 +26,10 @@ class Params_rdmf:
 
 
 _cutoffs = linspace(0.1, 0.9, 17)
-_target_names = ["active", "churned"]
+
+
+def cm_annotation(prefix: str) -> ndarray:
+    return array([f"{prefix}_active", f"{prefix}_churned"])
 
 
 def performance_measure(
@@ -35,15 +42,14 @@ def performance_measure(
     _report = classification_report(
         y,
         yHat,
-        target_names=_target_names,
         digits=3,
         output_dict=True)
     _acc = accuracy_score(y, yHat)
     _cf_mat = confusion_matrix(y, yHat)
     return _report, _acc, DataFrame(
                             data=_cf_mat,
-                            columns=_target_names,
-                            index=_target_names)
+                            columns=cm_annotation("pred"),
+                            index=cm_annotation("real"))
 
 
 def model_report(

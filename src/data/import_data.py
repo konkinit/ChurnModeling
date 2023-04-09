@@ -28,6 +28,8 @@ class ImportData:
 def import_data():
     params = ImportData()
     try:
+        return import_from_local(params.local_path)
+    finally:
         return import_from_S3(
             params.endpoint,
             params.bucket,
@@ -36,5 +38,3 @@ def import_data():
             params.access_key,
             params.token
         )
-    finally:
-        return import_from_local(params.local_path)
