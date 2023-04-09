@@ -23,7 +23,7 @@
 docker pull kidrissa/churnapp:latest
 ```
 ```bash
-docker run -p 8085:8085 -d kidrissa/churnapp:latest
+docker run -p 8501:8501 -d kidrissa/churnapp:latest
 ```
 
 ## Project description
