@@ -4,7 +4,10 @@ import json
 from dataclasses import dataclass
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
-from src.data.utils import import_from_local, import_from_S3
+from src.utils import (
+    import_from_local,
+    import_from_S3
+)
 
 
 with open("./data/tokens/tokens.json") as f:

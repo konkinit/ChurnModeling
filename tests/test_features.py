@@ -3,7 +3,7 @@ import sys
 import pytest
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
-from src.features import indicator_ab
+from src.utils import indicator_ab
 
 
 @pytest.mark.parametrize(

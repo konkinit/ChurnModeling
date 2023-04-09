@@ -3,7 +3,7 @@ import sys
 import pytest
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
-from src.data import check_train_frac
+from src.utils import check_train_frac
 
 
 def tests_file_present():

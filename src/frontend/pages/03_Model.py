@@ -1,27 +1,35 @@
 import os
 import sys
-from pickle import load
 import streamlit as st
+from pandas import DataFrame
+from pickle import load
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
 from src.models import (
-    Params_rdmf,
     train_rdmf,
     evaluate_rdmf
 )
+from src.utils import Params_rdmf
+
+
+Modeling_Data = load(
+    open('./data/app_inputs/modeling_data.pkl', 'rb'))
+
 
 st.markdown("# Modeling")
 
 st.markdown("To sum up, the modling part starts with data resumed \
 in the following table")
 
-# insert table
+st.dataframe(
+    data=DataFrame(
+        columns=[""]
+    ),
+    use_container_width=True
+)
 
 st.markdown("Since we deal with sparse matrix as inputs , mainly \
 tree-based models are implmented and compared. ")
-
-
-Modeling_Data = load(open('./data/app_inputs/modeling_data.pkl', 'rb'))
 
 
 st.markdown("## Random Forest")
@@ -35,8 +43,6 @@ rdmf_params = Params_rdmf(
     y_valid=Modeling_Data.y_valid,
     _n_estimators=100,
     _max_depth=2)
-
-
 train_rdmf(rdmf_params)
 
 
@@ -67,7 +73,6 @@ st.dataframe(
 st.dataframe(
     data=_cm_valid,
     use_container_width=False)
-
 st.dataframe(
     data=_report_train,
     use_container_width=True)

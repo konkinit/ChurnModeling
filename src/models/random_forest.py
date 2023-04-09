@@ -1,7 +1,14 @@
+import os
+import sys
 from pickle import dump, load
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.utils.class_weight import compute_sample_weight
-from .utils import model_report, Params_rdmf
+if os.getcwd() not in sys.path:
+    sys.path.append(os.getcwd())
+from src.utils import (
+    model_report,
+    Params_rdmf
+)
 
 
 def train_rdmf(config: Params_rdmf) -> None:

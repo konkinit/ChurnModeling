@@ -7,8 +7,11 @@ from scipy.sparse import _csc
 from sklearn.preprocessing import OneHotEncoder
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
-from src.features.utils import quantiles_list, indicator_ab
-from src.data import dataframe2sparse
+from src.utils import (
+    quantiles_list,
+    indicator_ab,
+    dataframe2sparse
+)
 
 
 class DataProcessing:

@@ -8,15 +8,14 @@ from warnings import simplefilter
 from yaml import load, Loader
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
-from src.data import (
-    import_data,
-    train_valid_splitting,
-    MetadataStats,
-    Modeling_Data
-)
+from src.data import import_data, MetadataStats
 from src.features import (
     MetaDataManagement,
-    DataManagement,
+    DataManagement
+)
+from src.utils import (
+    train_valid_splitting,
+    Modeling_Data,
     df_skewed_feature
 )
 

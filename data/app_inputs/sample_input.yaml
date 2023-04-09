@@ -1,2 +1,2 @@
 model: xgb
-train_frac: 0.75
+train_frac: 0.8
