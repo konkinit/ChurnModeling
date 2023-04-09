@@ -8,14 +8,16 @@ ARG USERNAME=appuser
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
+RUN groupadd --gid $USER_GID $USERNAME && \
+    useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
 
 USER ${USERNAME}
 
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt --user
 
-EXPOSE 8085
+EXPOSE 8501
 
-CMD ["streamlit", "run", "./src/frontend/Onboarding.py"]
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
+
+ENTRYPOINT ["streamlit", "run", "./src/frontend/Onboarding.py"]
