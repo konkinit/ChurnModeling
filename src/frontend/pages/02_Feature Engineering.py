@@ -8,15 +8,14 @@ from warnings import simplefilter
 from yaml import load, Loader
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
-from src.data import (
-    import_data,
-    train_valid_splitting,
-    MetadataStats,
-    Modeling_Data
-)
+from src.data import import_data, MetadataStats
 from src.features import (
     MetaDataManagement,
-    DataManagement,
+    DataManagement
+)
+from src.utils import (
+    train_valid_splitting,
+    Modeling_Data,
     df_skewed_feature
 )
 
@@ -83,12 +82,12 @@ st.markdown("### Categorical & Text features processing")
 
 st.markdown("In order to outcome to same data structure for the both \
 train and valid data sets, thTextMininge decisions here are:\n \
-* For categorical features the method employed is OneHotEncoding \
-with missing values, if they exist, form a category.\n \
+* For categorical features the method employed is OneHotEncoding.\n \
 * The text variable which is `verbatims` will be handled after splitting \
-the data set into train and valid partition in order to avoid information \
-leaking. Indeed the idea here is to build a text mining model \
-on the train data and afterwards score the valid data set ")
+the data set into train and validation partition in order to avoid \
+information leaking. Indeed the idea here is to build a text mining model \
+on the train data and afterwards fit that model on the validation \
+data set ")
 
 MetaDataManagement(raw_data).metadata_management_pipeline()
 

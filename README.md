@@ -17,12 +17,12 @@
 
 ---
 
-## Onboarding 
+## Getting Started 
 
-```
+```bash
 docker pull kidrissa/churnapp:latest
 ```
-```
+```bash
 docker run -p 8085:8085 -d kidrissa/churnapp:latest
 ```
 
@@ -31,7 +31,7 @@ The project is setted up in order to practise a tuto followed in an online cours
 a dataset from Telco industry the idea in the online course was to model churn by implementing an end-to-end
 data science project from data preprocessing, data modeling, model comparaison to putting champion model into production. 
 The project was done using SAS viya, a low-code environment. Consequently I decide to reimplement the project using the 
-first two C's of Cloud Native approach. My aim is to build a streamlit app on which user can following the project 
+first two C's of Cloud Native approach that is Code and Container. My aim is to build a streamlit app on which user can follow the project 
 end-to-end by entering some hyperparams to his convenience.
 
 ### Continous integration

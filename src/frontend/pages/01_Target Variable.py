@@ -4,7 +4,8 @@ import streamlit as st
 from plotly.express import pie
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
-from src.data import import_data, save_input_data
+from src.data import import_data
+from src.utils import save_input_data
 
 
 st.markdown("# Target variable: `churn`")

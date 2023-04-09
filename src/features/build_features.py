@@ -7,8 +7,11 @@ from scipy.sparse import _csc
 from sklearn.preprocessing import OneHotEncoder
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
-from src.features.utils import quantiles_list, indicator_ab
-from src.data import dataframe2sparse
+from src.utils import (
+    quantiles_list,
+    indicator_ab,
+    dataframe2sparse
+)
 
 
 class DataProcessing:
@@ -105,13 +108,19 @@ class DataProcessing:
         assert len(self.list_object_vars()) == 1, "Other object than verbatims"
 
     def text_mining(self) -> None:
-        """
-        remove the variable to process with text mining methods
-        until the right techniques are found
+        """Perform a text mining if on the train dataset otherwise
+        Fit a trained model on the validation dataset
         """
         self.data.drop("verbatims", axis=1, inplace=True)
 
     def sparse_data_format(self) -> Tuple[_csc.csc_matrix, list]:
+        """Transform the dataframe into a sparse matrix
+
+        Returns:
+            Tuple[_csc.csc_matrix, list]: the first arg is the
+                sparse matrix and the second the list of variables
+                names
+        """
         return dataframe2sparse(self.data)
 
 
