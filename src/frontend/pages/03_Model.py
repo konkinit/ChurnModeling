@@ -25,7 +25,7 @@ st.dataframe(
     data=DataFrame(
         columns=[""]
     ),
-    use_container_width=True
+    use_container_width=False
 )
 
 st.markdown("Since we deal with sparse matrix as inputs , mainly \
@@ -37,12 +37,13 @@ st.markdown("It is a classification task then predicting a class for an obs. \
 depends on a certain cutoff which have a default value of 0.5. \
 Model performance is going to be monitored with some ranged values of cutoffs")
 rdmf_params = Params_rdmf(
-    X_train=Modeling_Data.X_train_sparse,
-    y_train=Modeling_Data.y_train,
-    X_valid=Modeling_Data.X_valid_sparse,
-    y_valid=Modeling_Data.y_valid,
-    _n_estimators=100,
-    _max_depth=2)
+                    X_train=Modeling_Data.X_train_sparse,
+                    y_train=Modeling_Data.y_train,
+                    X_valid=Modeling_Data.X_valid_sparse,
+                    y_valid=Modeling_Data.y_valid,
+                    _n_estimators=100,
+                    _max_depth=2
+)
 train_rdmf(rdmf_params)
 
 
@@ -51,7 +52,8 @@ _cutoff = st.slider(
                 min_value=0.1,
                 max_value=0.9,
                 value=0.5,
-                step=0.05)
+                step=0.05
+)
 
 
 (_report_train,
@@ -61,9 +63,9 @@ _cutoff = st.slider(
  _acc_valid,
  _cm_valid) = evaluate_rdmf(rdmf_params, _cutoff)
 
-st.markdown(f"The accuracies on the training and valid datasets are \
-{round(100*_acc_train, 2)} % and {round(100*_acc_valid, 2)} % respectively \
-according to a cutoff of {_cutoff}")
+st.markdown(f"The accuracies on the training and validation datasets are \
+**{round(100*_acc_train, 2)}** % and **{round(100*_acc_valid, 2)}** % \
+respectively according to a cutoff of {_cutoff}")
 
 st.markdown("The classification report on both training and validation \
 datasets are listed below")

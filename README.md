@@ -23,7 +23,7 @@
 docker pull kidrissa/churnapp:latest
 ```
 ```bash
-docker run -p 8501:8501 -d kidrissa/churnapp:latest
+docker run -p 8005:8005 -d kidrissa/churnapp:latest
 ```
 
 ## Project description
@@ -35,6 +35,12 @@ first two C's of Cloud Native approach that is Code and Container. My aim is to 
 end-to-end by entering some hyperparams to his convenience.
 
 ### Continous integration
-One continous integration (CI) procedure with 2 jobs mainly is designed and launched at every push to the main branch:
+One continous integration (CI) procedure with 2 jobs mainly is designed and launched at every push and merge to the main branch:
 -  Testing. Pytest collects the test from the tests folder and executes them
   -  if Testing goes through, a Docker Image is built and pushed onto the docker hub
+
+
+### Dataset
+The dataset used is
+
+### Modeling

@@ -1,6 +1,7 @@
 from ._models import (
     Params_rdmf,
     model_report,
+    _sample_weight,
     performance_measure
 )
 from ._features import (
@@ -22,6 +23,7 @@ from ._data import (
 __all__ = [
     "Params_rdmf",
     "model_report",
+    "_sample_weight",
     "performance_measure",
     "classification_report",
     "DataManagement",

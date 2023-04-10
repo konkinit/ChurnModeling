@@ -26,10 +26,12 @@ st.markdown("Before feature engineering starts, it is suitable to perform \
 data splitting in order to avoid information leaks. Here a stratify \
 splitting is performed.")
 
-train_frac = st.slider(label='Choose the percent of the training data set',
-                       min_value=50,
-                       max_value=100,
-                       value=70,
-                       step=5)
+train_frac = st.slider(
+                label='Choose the percent of the training data set',
+                min_value=50,
+                max_value=100,
+                value=70,
+                step=5
+)
 
 save_input_data("train_frac", train_frac/100)

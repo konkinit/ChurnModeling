@@ -3,7 +3,10 @@ from .data import (
     metadata_analysis
 )
 from .features import build_features
-from .models import random_forest, text_mining
+from .models import (
+    random_forest,
+    text_mining
+)
 from .utils import (
     _data,
     _models,

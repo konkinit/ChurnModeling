@@ -68,10 +68,12 @@ log_feature = st.radio(
     (feature, f"log_{feature}"))
 
 
-fig = histogram(df_skewed_feature(raw_data, feature),
-                x=log_feature,
-                nbins=30,
-                histnorm='probability density')
+fig = histogram(
+        df_skewed_feature(raw_data, feature),
+        x=log_feature,
+        nbins=30,
+        histnorm='probability density'
+)
 st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("* It is not reasonnable for some variables such as to have \
@@ -115,6 +117,7 @@ modeling_data = Modeling_Data(
                     X_valid_sp_mat,
                     y_train,
                     y_valid,
-                    "churn")
+                    "churn"
+)
 
 dump(modeling_data, open('./data/app_inputs/modeling_data.pkl', 'wb'))
