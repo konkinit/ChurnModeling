@@ -68,10 +68,12 @@ log_feature = st.radio(
     (feature, f"log_{feature}"))
 
 
-fig = histogram(df_skewed_feature(raw_data, feature),
-                x=log_feature,
-                nbins=30,
-                histnorm='probability density')
+fig = histogram(
+        df_skewed_feature(raw_data, feature),
+        x=log_feature,
+        nbins=30,
+        histnorm='probability density'
+)
 st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("* It is not reasonnable for some variables such as to have \
@@ -96,7 +98,7 @@ st.markdown("## Data Level")
 with open(r'./data/app_inputs/sample_input.yaml') as file:
     app_inputs = load(file, Loader=Loader)
 
-X_train, X_valid, y_train, y_valid = train_valid_splitting(
+X_train, X_test, y_train, y_test = train_valid_splitting(
                                         raw_data,
                                         float(app_inputs["train_frac"]))
 
@@ -106,15 +108,16 @@ st.markdown(f"Thsi part starts by splitting the data according to the selected\
 
 X_train_sp_mat, _features_name_train = DataManagement(
                                     X_train).data_management_pipeline()
-X_valid_sp_mat, _features_name_valid = DataManagement(
-                                    X_valid).data_management_pipeline()
+X_test_sp_mat, _features_name_valid = DataManagement(
+                                    X_test).data_management_pipeline()
 
 
 modeling_data = Modeling_Data(
                     X_train_sp_mat,
-                    X_valid_sp_mat,
+                    X_test_sp_mat,
                     y_train,
-                    y_valid,
-                    "churn")
+                    y_test,
+                    "churn"
+)
 
 dump(modeling_data, open('./data/app_inputs/modeling_data.pkl', 'wb'))

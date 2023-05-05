@@ -1,2 +1,3 @@
 model: xgb
-train_frac: 0.85
+rdmf_cutoff: 0.5
+train_frac: 0.7
