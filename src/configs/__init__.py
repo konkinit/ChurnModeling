@@ -3,10 +3,13 @@ from .models_configs import (
     xgb_configs,
     models_inputs
 )
-
+from .data_configs import (
+    ImportData
+)
 
 __all__ = [
     "rdmf_configs",
     "xgb_configs",
-    "models_inputs"
+    "models_inputs",
+    "ImportData"
 ]

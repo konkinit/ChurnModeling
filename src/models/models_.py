@@ -3,6 +3,7 @@ import sys
 from pickle import dump, load
 from sklearn.ensemble import RandomForestClassifier
 from typing import Tuple, Any
+from xgboost import XGBClassifier
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
 from src.utils import (
@@ -15,7 +16,7 @@ from src.configs import (
 )
 
 
-class RandomForest_:
+class EnsembleModel_:
     def __init__(
             self,
             model_name,
@@ -30,12 +31,15 @@ class RandomForest_:
             X_test,
             y_test
         )
+
+    def model_config_(self) -> None:
         self.model_config = RandomForestClassifier(
-            n_estimators=rdmf_configs().n_estimator,
+            n_estimators=rdmf_configs().n_estimators,
             max_depth=rdmf_configs().max_depth
         )
 
     def fit_and_save(self) -> None:
+        self.model_config_()
         self.model_config.fit(
             self.inputs.X_train,
             self.inputs.y_train,
@@ -62,3 +66,37 @@ class RandomForest_:
                     self.inputs,
                     cutoff
                 )
+
+
+class RandomForest_(EnsembleModel_):
+    def __init__(
+            self,
+            model_name,
+            X_train,
+            y_train,
+            X_test,
+            y_test):
+        super().__init__(model_name, X_train, y_train, X_test, y_test)
+
+    def model_config_(self) -> None:
+        self.model_config = RandomForestClassifier(
+            n_estimators=rdmf_configs().n_estimators,
+            max_depth=rdmf_configs().max_depth
+        )
+
+
+class XGBClassifier_(EnsembleModel_):
+    def __init__(
+            self,
+            model_name,
+            X_train,
+            y_train,
+            X_test,
+            y_test):
+        super().__init__(model_name, X_train, y_train, X_test, y_test)
+
+    def model_config_(self) -> None:
+        self.model_config = XGBClassifier(
+            n_estimators=rdmf_configs().n_estimators,
+            max_depth=rdmf_configs().max_depth
+        )

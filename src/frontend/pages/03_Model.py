@@ -5,6 +5,7 @@ from pandas import DataFrame
 from pickle import load
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
+from src.utils import save_input_data
 from src.models import (
     RandomForest_
 )
@@ -13,7 +14,6 @@ from src.models import (
 Modeling_Data = load(
     open('./data/app_inputs/modeling_data.pkl', 'rb'))
 
-
 st.markdown("# Modeling")
 
 st.markdown("To sum up, the modling part starts with data resumed \
@@ -21,7 +21,16 @@ in the following table")
 
 st.dataframe(
     data=DataFrame(
-        columns=[""]
+        data=[[
+                Modeling_Data.X_train_sparse.shape[0],
+                Modeling_Data.X_train_sparse.shape[1]
+            ],
+              [
+                Modeling_Data.X_test_sparse.shape[0],
+                Modeling_Data.X_test_sparse.shape[1]
+            ]],
+        columns=["Number of observation", "Number of features"],
+        index=[["Training data", "Test data"]]
     ),
     use_container_width=False
 )
@@ -54,6 +63,11 @@ _cutoff = st.slider(
                 value=0.5,
                 step=0.05
             )
+
+save_input_data(
+    "rdmf_cutoff",
+    _cutoff
+)
 
 (
     _report_train,

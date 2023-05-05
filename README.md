@@ -17,6 +17,11 @@
 
 ---
 
+## To Do
+
+- Add accuracy plot in page 03
+- Implement XGB modeel
+
 ## Getting Started 
 
 ```bash

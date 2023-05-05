@@ -33,6 +33,17 @@ from src.configs import (
 )
 
 
+_cutoffs = linspace(0.1, 0.9, 17)
+
+
+_key_rename = {
+    "0.0": "active",
+    "1.0": "churned",
+    "macro avg": "macro avg",
+    "weighted avg": "weighted avg"
+    }
+
+
 def import_from_S3(
         endpoint: str,
         bucket: str,
@@ -130,17 +141,6 @@ def df_skewed_feature(df: DataFrame, feature: str) -> DataFrame:
     return df_plot
 
 
-_cutoffs = linspace(0.1, 0.9, 17)
-
-
-_key_rename = {
-    "0.0": "active",
-    "1.0": "churned",
-    "macro avg": "macro avg",
-    "weighted avg": "weighted avg"
-    }
-
-
 def _sample_weight(target_array: ndarray) -> ndarray:
     return compute_sample_weight(
                 class_weight='balanced',
@@ -212,17 +212,17 @@ def model_report(
                     params.y_train,
                     cutoff
                 )
-    _report_valid, _acc_valid, _cm_valid = performance_measure(
+    _report_test, _acc_test, _cm_test = performance_measure(
                                                 model,
-                                                params.X_valid,
-                                                params.y_valid,
+                                                params.X_test,
+                                                params.y_test,
                                                 cutoff
                                             )
     return (
         _report_train,
         _acc_train,
         _cm_train,
-        _report_valid,
-        _acc_valid,
-        _cm_valid
+        _report_test,
+        _acc_test,
+        _cm_test
     )
