@@ -11,7 +11,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 USER ${USERNAME}
 
-ENV PATH="/home/${USERNAME}}/.local/bin:${PATH}"
+ENV PATH="${PATH}:/home/${USERNAME}}/.local/bin"
 
 WORKDIR /home/${USERNAME}
 
