@@ -1,12 +1,10 @@
-from .random_forest import (
-    evaluate_rdmf,
-    train_rdmf
+from .models_ import (
+    RandomForest_
 )
 from .text_mining import TextMining
 
 
 __all__ = [
-    "evaluate_rdmf",
-    "train_rdmf",
+    "RandomForest_",
     "TextMining",
     ]
