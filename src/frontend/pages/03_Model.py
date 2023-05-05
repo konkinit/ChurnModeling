@@ -38,6 +38,7 @@ st.dataframe(
 st.markdown("Since we deal with sparse matrix as inputs , mainly \
 tree-based models are implmented and compared. ")
 
+
 st.markdown("## Random Forest")
 
 st.markdown("It is a classification task then predicting a class for an obs. \
