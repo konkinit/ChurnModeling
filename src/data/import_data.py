@@ -12,8 +12,8 @@ from src.configs import ImportData
 def import_data():
     params = ImportData()
     if os.path.isfile(os.path.join(params.local_path)):
-        return import_from_local(params.local_path)
-    return import_from_S3(
+        _df = import_from_local(params.local_path)
+    _df = import_from_S3(
         params.endpoint,
         params.bucket,
         params.path,
@@ -21,3 +21,7 @@ def import_data():
         params.access_key,
         params.token
     )
+    return _df.apply(
+            lambda x: x.apply(
+                lambda z: z.decode("utf-8") if type(z) == bytes else z),
+            axis=1)

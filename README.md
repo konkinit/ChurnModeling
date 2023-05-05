@@ -19,8 +19,10 @@
 
 ## To Do
 
+- Refine metadata stats
 - Add accuracy plot in page 03
 - Implement XGB modeel
+- Implement Text mining
 
 ## Getting Started 
 

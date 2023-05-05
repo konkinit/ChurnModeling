@@ -62,7 +62,8 @@ def import_from_S3(
 
     return read_sas(
                 fs.open(f"{bucket}/{path}/commsdata.sas7bdat"),
-                format='sas7bdat')
+                format='sas7bdat'
+            )
 
 
 def import_from_local(path) -> DataFrame:
@@ -193,36 +194,32 @@ def performance_measure(
                 )
     return _report, _acc, DataFrame(
                             data=_cf_matrix,
-                            columns=cm_annotation("pred"),
+                            columns=cm_annotation("prediction"),
                             index=cm_annotation("real")
-                            )
+                        )
 
 
 def model_report(
         model: Union[RandomForestClassifier, XGBClassifier],
         params: models_inputs,
         cutoff: float) -> Tuple[Any]:
-    (
-        _report_train,
-        _acc_train,
-        _cm_train
-    ) = performance_measure(
-                    model,
-                    params.X_train,
-                    params.y_train,
-                    cutoff
-                )
-    _report_test, _acc_test, _cm_test = performance_measure(
-                                                model,
-                                                params.X_test,
-                                                params.y_test,
-                                                cutoff
-                                            )
+    report_train, acc_train, cm_train = performance_measure(
+                                            model,
+                                            params.X_train,
+                                            params.y_train,
+                                            cutoff
+                                        )
+    report_test, acc_test, cm_test = performance_measure(
+                                            model,
+                                            params.X_test,
+                                            params.y_test,
+                                            cutoff
+                                        )
     return (
-        _report_train,
-        _acc_train,
-        _cm_train,
-        _report_test,
-        _acc_test,
-        _cm_test
+        report_train,
+        acc_train,
+        cm_train,
+        report_test,
+        acc_test,
+        cm_test
     )

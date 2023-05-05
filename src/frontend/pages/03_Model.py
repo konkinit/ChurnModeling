@@ -44,7 +44,6 @@ st.markdown("It is a classification task then predicting a class for an obs. \
 depends on a certain cutoff which have a default value of 0.5. \
 Model performance is going to be monitored with some ranged values of cutoffs")
 
-
 rdmf_model = RandomForest_(
     model_name="rdmf",
     X_train=Modeling_Data.X_train_sparse,
@@ -54,7 +53,6 @@ rdmf_model = RandomForest_(
 )
 
 rdmf_model.fit_and_save()
-
 
 _cutoff = st.slider(
                 label='Choose the cutoff',
@@ -70,32 +68,29 @@ save_input_data(
 )
 
 (
-    _report_train,
-    _acc_train,
-    _cm_train,
-    _report_valid,
-    _acc_valid,
-    _cm_valid
+    report_train, accuracy_train, cm_train,
+    report_test, accuracy_test, cm_test
 ) = rdmf_model.inference(_cutoff)
 
-st.markdown(f"The accuracies on the training and validation datasets are \
-**{round(100*_acc_train, 2)}** % and **{round(100*_acc_valid, 2)}** % \
-respectively according to a cutoff of {_cutoff}")
+st.markdown("The classification reports are listed below and \
+refer respectively to training and test datasets")
 
-st.markdown("The classification report on both training and validation \
-datasets are listed below")
-st.dataframe(
-    data=_cm_train,
-    use_container_width=False)
-st.dataframe(
-    data=_cm_valid,
-    use_container_width=False)
-st.dataframe(
-    data=_report_train,
-    use_container_width=True)
-st.dataframe(
-    data=_report_valid,
-    use_container_width=True)
+col1, col2, col3 = st.columns(3)
+col1.metric("Accuracy", f"{round(100*accuracy_train, 2)}")
+col2.metric("Recall `active`", f"\
+    {round(100*report_train['active']['recall'], 2)}")
+col3.metric("Recall `churned`", f"\
+    {round(100*report_train['churned']['recall'], 2)}")
+
+st.dataframe(data=cm_train)
+
+col1_, col2_, col3_ = st.columns(3)
+col1_.metric("Accuracy", f"{round(100*accuracy_test, 2)}")
+col2_.metric("Recall `active`", f"\
+    {round(100*report_test['active']['recall'], 2)}")
+col3_.metric("Recall `churned`", f"\
+    {round(100*report_test['churned']['recall'], 2)}")
+st.dataframe(data=cm_test)
 
 
 st.markdown("## XGBoost")
