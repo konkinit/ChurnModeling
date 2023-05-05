@@ -23,4 +23,4 @@ EXPOSE 8005
 
 HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
-ENTRYPOINT ["streamlit", "run", "./churn_modeling/src/frontend/Onboarding.py", "--server.port", "8005"]
+CMD ["streamlit", "run", "./churn_modeling/src/frontend/Onboarding.py", "--server.port", "8005"]
