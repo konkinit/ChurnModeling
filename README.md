@@ -4,7 +4,10 @@
 </h1>
 
 
-<p align="center">This project aims to predict churn using datasetss from the Telco industry<br/> </p>
+<p align="center">
+  This project aims to predict churn using datasetss from the Telco industry
+  <br/>
+</p>
 
 ---
 <p align="center">
@@ -30,7 +33,7 @@
 docker pull kidrissa/churnapp:latest
 ```
 ```bash
-docker run -p 8005:8005 -d kidrissa/churnapp:latest
+docker run -p 8501:8501 -d kidrissa/churnapp:latest
 ```
 
 ## Project description

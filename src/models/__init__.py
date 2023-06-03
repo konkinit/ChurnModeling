@@ -1,12 +1,12 @@
 from .models_ import (
-    RandomForest_,
-    XGBClassifier_
+    _RandomForest,
+    _XGBClassifier
 )
 from .text_mining import TextMining
 
 
 __all__ = [
-    "RandomForest_",
+    "_RandomForest",
     "TextMining",
-    "XGBClassifier_"
+    "_XGBClassifier"
 ]

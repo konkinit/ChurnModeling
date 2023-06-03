@@ -29,7 +29,8 @@ from xgboost import XGBClassifier
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
 from src.configs import (
-    models_inputs
+    models_inputs,
+    S3_configs
 )
 
 
@@ -45,23 +46,24 @@ _key_rename = {
 
 
 def import_from_S3(
-        endpoint: str,
-        bucket: str,
-        path: str,
-        key_id: str,
-        access_key: str,
-        token: str) -> DataFrame:
-    """
-    enabling conexion to s3 storage for data retrieving
+        params: S3_configs
+) -> DataFrame:
+    """Connect to S3 bucket and get data
+
+    Args:
+        params (S3_configs): S3 config data
+
+    Returns:
+        DataFrame: dataframe for modeling
     """
     fs = s3fs.S3FileSystem(
-            client_kwargs={'endpoint_url': endpoint},
-            key=key_id,
-            secret=access_key,
-            token=token)
+            client_kwargs={'endpoint_url': params.endpoint},
+            key=params.key_id,
+            secret=params.access_key,
+            token=params.token)
 
     return read_sas(
-                fs.open(f"{bucket}/{path}/commsdata.sas7bdat"),
+                fs.open(f"{params.bucket}/{params.path}/commsdata.sas7bdat"),
                 format='sas7bdat'
             )
 

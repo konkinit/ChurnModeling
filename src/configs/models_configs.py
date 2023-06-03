@@ -11,7 +11,7 @@ def rdmf_configs() -> ConfigDict:
     return cfg
 
 
-def xgb_configs():
+def xgb_configs() -> ConfigDict:
     cfg = ConfigDict()
     cfg.max_depth = 2
     cfg.n_estimators = 500

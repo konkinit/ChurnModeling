@@ -5,7 +5,6 @@ from plotly.express import pie
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
 from src.data import import_data
-from src.utils import save_input_data
 
 
 st.markdown("# Target variable: `churn`")
@@ -34,4 +33,4 @@ train_frac = st.slider(
                 step=5
 )
 
-save_input_data("train_frac", train_frac/100)
+st.session_state["train_frac"] = train_frac/100

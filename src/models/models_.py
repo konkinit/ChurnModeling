@@ -12,18 +12,20 @@ from src.utils import (
 )
 from src.configs import (
     models_inputs,
-    rdmf_configs
+    rdmf_configs,
+    xgb_configs
 )
 
 
-class EnsembleModel_:
+class EnsembleModel:
     def __init__(
             self,
             model_name,
             X_train,
             y_train,
             X_test,
-            y_test):
+            y_test
+    ) -> None:
         self.model_name = model_name
         self.inputs = models_inputs(
             X_train,
@@ -32,26 +34,22 @@ class EnsembleModel_:
             y_test
         )
 
-    def model_config_(self) -> None:
-        self.model_config = RandomForestClassifier(
-            n_estimators=rdmf_configs().n_estimators,
-            max_depth=rdmf_configs().max_depth
-        )
-
     def fit_and_save(self) -> None:
-        self.model_config_()
-        self.model_config.fit(
+        """Configure, fit and save the model
+        """
+        self._model_config()
+        self.model.fit(
             self.inputs.X_train,
             self.inputs.y_train,
             _sample_weight(self.inputs.y_train)
         )
         dump(
-            self.model_config,
+            self.model,
             open(f'./data/models/{self.model_name}.pkl', 'wb')
         )
 
     def inference(self, cutoff: float) -> Tuple[Any]:
-        """_summary_
+        """Outputs inference on the model
 
         Args:
             cutoff (float): cutoff for transforming probabilities to discrete
@@ -62,41 +60,35 @@ class EnsembleModel_:
         """
         model = load(open(f'./data/models/{self.model_name}.pkl', 'rb'))
         return model_report(
-                    model,
-                    self.inputs,
-                    cutoff
-                )
-
-
-class RandomForest_(EnsembleModel_):
-    def __init__(
-            self,
-            model_name,
-            X_train,
-            y_train,
-            X_test,
-            y_test):
-        super().__init__(model_name, X_train, y_train, X_test, y_test)
-
-    def model_config_(self) -> None:
-        self.model_config = RandomForestClassifier(
-            n_estimators=rdmf_configs().n_estimators,
-            max_depth=rdmf_configs().max_depth
+                model,
+                self.inputs,
+                cutoff
         )
 
 
-class XGBClassifier_(EnsembleModel_):
+class _RandomForest(EnsembleModel):
     def __init__(
             self,
-            model_name,
             X_train,
             y_train,
             X_test,
-            y_test):
-        super().__init__(model_name, X_train, y_train, X_test, y_test)
+            y_test
+    ) -> None:
+        super().__init__("rdf", X_train, y_train, X_test, y_test)
 
-    def model_config_(self) -> None:
-        self.model_config = XGBClassifier(
-            n_estimators=rdmf_configs().n_estimators,
-            max_depth=rdmf_configs().max_depth
-        )
+    def _model_config(self) -> None:
+        self.model = RandomForestClassifier(**dict(rdmf_configs()))
+
+
+class _XGBClassifier(EnsembleModel):
+    def __init__(
+            self,
+            X_train,
+            y_train,
+            X_test,
+            y_test
+    ) -> None:
+        super().__init__("xgb", X_train, y_train, X_test, y_test)
+
+    def _model_config(self) -> None:
+        self.model = XGBClassifier(**dict(xgb_configs()()))

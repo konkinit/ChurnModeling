@@ -7,7 +7,7 @@ with open("./data/tokens/tokens.json") as f:
 
 
 @dataclass
-class ImportData:
+class S3_configs:
     local_path: str = "./data/commsdata.sasb7dat"
     endpoint: str = tokens["endpoint_url"]
     bucket: str = tokens["bucket"]

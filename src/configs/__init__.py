@@ -4,12 +4,12 @@ from .models_configs import (
     models_inputs
 )
 from .data_configs import (
-    ImportData
+    S3_configs
 )
 
 __all__ = [
     "rdmf_configs",
     "xgb_configs",
     "models_inputs",
-    "ImportData"
+    "S3_configs"
 ]
