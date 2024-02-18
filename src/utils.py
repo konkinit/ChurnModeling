@@ -57,15 +57,15 @@ def import_from_S3(
         DataFrame: dataframe for modeling
     """
     fs = s3fs.S3FileSystem(
-            client_kwargs={'endpoint_url': params.endpoint},
-            key=params.key_id,
-            secret=params.access_key,
-            token=params.token)
+        client_kwargs={'endpoint_url': params.endpoint},
+        key=params.key_id,
+        secret=params.access_key,
+        token=params.token)
 
     return read_sas(
-                fs.open(f"{params.bucket}/{params.path}/commsdata.sas7bdat"),
-                format='sas7bdat'
-            )
+        fs.open(f"{params.bucket}/{params.path}/commsdata.sas7bdat"),
+        format='sas7bdat'
+    )
 
 
 def import_from_local(path) -> DataFrame:

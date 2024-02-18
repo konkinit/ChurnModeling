@@ -4,6 +4,7 @@ import streamlit as st
 from plotly.express import histogram
 from pandas.errors import PerformanceWarning
 from warnings import simplefilter
+
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
 from src.data import import_data, MetadataStats
@@ -26,12 +27,13 @@ st.markdown("# Feature Engineering")
 st.markdown(
     "Since ML model perform well with no leak of information \
     between train and test datasets, it comes to distinguish two \
-    levels of data engineering")
+    levels of data engineering"
+)
 
 st.markdown("## Metadata Level")
 
 st.markdown(
-    "Below is the metadata tables, one for numerocal data type and \
+    "Below is the metadata tables, one for numerical data type and \
     the other for character data type. They describe the raw properties \
     of each feature. for better understanding and better decision"
 )
@@ -58,7 +60,7 @@ st.markdown("\
 `data_usage_amt`, \
 `mou_onnet_6m_normal`, `mou_roam_6m_normal`, `region_lat`, `region_long`, \
 `state_lat`, `state_long`, `tweedie_adjusted`, `upsell_xsell`; \n \
-* Some varoable especially those having `MB_Data_Usg_M0` are very skewed as \
+* Some variables especially those having `MB_Data_Usg_M0` are very skewed as \
 the plot describes. A $\\log$ transformation here is suitable to handle \
 log_MB_Data_Usg_M0_i = $\\log$ (1 + MB_Data_Usg_M0_i)")
 
@@ -128,11 +130,11 @@ X_test_sp_mat, _ = DataManagement(
 
 
 modeling_data = Modeling_Data(
-                    X_train_sp_mat,
-                    X_test_sp_mat,
-                    y_train,
-                    y_test,
-                    "churn"
+    X_train_sp_mat,
+    X_test_sp_mat,
+    y_train,
+    y_test,
+    "churn"
 )
 
 st.session_state["modeling_data"] = modeling_data

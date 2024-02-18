@@ -1,17 +1,17 @@
-import json
+import os
 from dataclasses import dataclass
+from dotenv import load_dotenv
 
 
-with open("./data/tokens/tokens.json") as f:
-    tokens = json.load(f)
+load_dotenv()
 
 
 @dataclass
 class S3_configs:
-    local_path: str = "./data/commsdata.sasb7dat"
-    endpoint: str = tokens["endpoint_url"]
-    bucket: str = tokens["bucket"]
-    path: str = tokens["path"]
-    key_id: str = tokens["key_id"]
-    access_key: str = tokens["access_key"]
-    token: str = tokens["token"]
+    local_path: str = os.environ.get("LOCAL_PATH")
+    endpoint: str = os.environ.get("ENDPOINT_URL")
+    bucket: str = os.environ.get("BUCKET")
+    path: str = os.environ.get("PATH")
+    key_id: str = os.environ.get("KEY_ID")
+    access_key: str = os.environ.get("ACCESS_KEY")
+    token: str = os.environ.get("TOKEN")

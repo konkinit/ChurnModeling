@@ -1,21 +1,10 @@
 FROM python:3.10-slim
 
-ARG USERNAME=appuser
-ARG USER_UID=1000
+COPY . ./churn_modeling
 
-RUN useradd --uid $USER_UID -m $USERNAME
+WORKDIR /churn_modeling
 
-USER ${USERNAME}
-
-ENV PATH="${PATH}:/home/${USERNAME}}/.local/bin"
-
-COPY --chown=${USERNAME}:${USERNAME} . ./churn_modeling
-
-WORKDIR /home/${USERNAME}/churn_modeling
-
-RUN pip install --user --upgrade pip
-
-RUN pip install --user -r ./churn_modeling/requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
 EXPOSE 8501
 

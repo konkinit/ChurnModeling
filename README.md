@@ -37,17 +37,21 @@ docker run -p 8501:8501 -d kidrissa/churnapp:latest
 ```
 
 ## Project description
-The project is setted up in order to practise a tuto followed in an online course. Using 
-a dataset from Telco industry the idea in the online course was to model churn by implementing an end-to-end
-data science project from data preprocessing, data modeling, model comparaison to putting champion model into production. 
-The project was done using SAS viya, a low-code environment. Consequently I decide to reimplement the project using the 
-first two C's of Cloud Native approach that is Code and Container. My aim is to build a streamlit app on which user can follow the project 
-end-to-end by entering some hyperparams to his convenience.
+The project is set up in order to practice a tuto followed in an online course. Using 
+a dataset from Telco industry the idea in the online course was to model churn by 
+implementing an end-to-end data science project from data preprocessing, data modeling, 
+model comparaison to putting champion model into production. The project was done using 
+SAS viya, a low-code environment. Consequently I decide to reimplement the project using the 
+first two C's of Cloud Native approach that is Code and Container. My aim is to build a 
+streamlit app on which user can follow the project end-to-end by entering some hyperparams 
+to his convenience.
 
-### Continous integration
-One continous integration (CI) procedure with 2 jobs mainly is designed and launched at every push and merge to the main branch:
--  Testing. Pytest collects the test from the tests folder and executes them
-  -  if Testing goes through, a Docker Image is built and pushed onto the docker hub
+### Continuous integration
+One continuous integration (CI) procedure with 2 jobs mainly is designed and launched at every 
+push and merge to the main branch:
+-  Linting & Testing. Flake8 grants high quality of code while Pytest collects the test from 
+the tests folder and executes them
+-  if Testing goes through, a Docker Image is built and pushed onto the docker hub
 
 
 ### Dataset
