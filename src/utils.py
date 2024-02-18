@@ -8,12 +8,7 @@ from pandas import (
     SparseDtype,
     Series
 )
-from numpy import (
-    linspace,
-    ndarray,
-    array,
-    log
-)
+from numpy import linspace, ndarray, array, log
 from dataclasses import dataclass
 from typing import Tuple, Any, Union
 from sklearn.model_selection import train_test_split
@@ -63,7 +58,7 @@ def import_from_S3(
         token=params.token)
 
     return read_sas(
-        fs.open(f"{params.bucket}/{params.path}/commsdata.sas7bdat"),
+        fs.open(f"{params._bucket}/{params._path}/commsdata.sas7bdat"),
         format='sas7bdat'
     )
 

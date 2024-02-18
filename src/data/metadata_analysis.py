@@ -3,13 +3,13 @@ from pandas import DataFrame, concat
 
 
 num_keys = [
-                "Variable Name", "Label", "Type",
-                "Number of missing",
-                "Number of distinct values",
-                "Minimum", "Maximum",
-                "Mean", "Mode",
-                "Standard Deviation", "Skewness", "Kurtosis"
-            ]
+    "Variable Name", "Label", "Type",
+    "Number of missing",
+    "Number of distinct values",
+    "Minimum", "Maximum",
+    "Mean", "Mode",
+    "Standard Deviation", "Skewness", "Kurtosis"
+]
 
 
 char_keys = [

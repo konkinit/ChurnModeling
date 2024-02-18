@@ -10,14 +10,13 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    
+  lint_test:
+    name: Code Lint and Test
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python 3.10
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: "3.10"
     - name: Install dependencies
@@ -33,6 +32,14 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+
+  build_image:
+    name: Docker Image Build
+    needs: lint_test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
     - name: Build Docker Image
       run: |
           docker build . --file Dockerfile --tag kidrissa/churnapp:latest

@@ -14,3 +14,4 @@ tqdm
 Jinja2
 xgboost
 ml-collections
+python-dotenv
