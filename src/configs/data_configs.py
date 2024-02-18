@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from dotenv import load_dotenv
 
 
-load_dotenv(dotenv_path="./dotenv-file")
+load_dotenv(dotenv_path="./dotenv-file/.env")
 
 
 class S3_configs(BaseModel):
