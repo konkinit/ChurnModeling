@@ -10,4 +10,4 @@ EXPOSE 8501
 
 HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
-CMD ["streamlit", "run", "./churn_modeling/src/frontend/Onboarding.py", "--server.port", "8501"]
+CMD ["streamlit", "run", "./src/frontend/Onboarding.py", "--server.port", "8501"]
