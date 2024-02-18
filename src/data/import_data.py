@@ -5,7 +5,6 @@ from functools import lru_cache
 if os.getcwd() not in sys.path:
     sys.path.append(os.getcwd())
 from src.utils import (
-    import_from_local,
     import_from_S3
 )
 from src.configs import S3_configs
@@ -14,8 +13,6 @@ from src.configs import S3_configs
 @lru_cache(maxsize=1)
 def import_data():
     params = S3_configs()
-    if os.path.isfile(os.path.join(params.local_path)):
-        _df = import_from_local(params.local_path)
     _df = import_from_S3(params)
     return _df.apply(
         lambda x: x.apply(
